@@ -37,14 +37,12 @@ namespace CS291_Project
 		/*Purpose: This sets start date*/
 		private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
 		{
-			
+			this.startDate = dateTimePicker3.Value;
 		}
 		/*Purpose: This sets end date*/
 		private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
 		{
 			this.endDate = dateTimePicker2.Value;
-			button9.Text = "To open";
-			button10.Text = this.endDate.ToString();
 		}
 
 		/*Purpose: This one tells the per branch rented cars*/
