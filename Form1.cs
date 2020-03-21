@@ -16,5 +16,10 @@ namespace CS291_Project
 		{
 			InitializeComponent();
 		}
+
+		private void tabCharts_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
