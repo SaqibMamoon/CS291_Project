@@ -15,9 +15,16 @@ namespace CS291_Project
 		public Form1()
 		{
 			InitializeComponent();
+			label1.Text = "Start Date";
+			label2.Text = "End Date";
 		}
 
-		private void tabCharts_Click(object sender, EventArgs e)
+		private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
 		{
 
 		}
