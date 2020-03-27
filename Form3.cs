@@ -36,28 +36,39 @@ namespace CS291_Project
             label2.Font = new Font("Times New Roman", 12, FontStyle.Bold);
 
             button1.Text = "Login";
+            button2.Text = "New User";
 
             textBox2.TabIndex = 0;
             textBox1.TabIndex = 1;
             button1.TabIndex = 2;
+            button2.TabIndex = 3;
         }
 
         /*Purpose: To deal with when the log in button is clicked*/
         private void button1_Click(object sender, EventArgs e)
         {
-            label1.Text = username;
-            label2.Text = password;
-            
             //Here we will place the check. We can establish multiple different methods for storing users.
             
-            Form1 m = new Form1();
-            m.Show();
+            this.Hide();
+            Form2 m = new Form2();
+            m.ShowDialog();
+            this.Close();
+        }
+        /*Purpose: To open new window for a new user*/
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            this.Hide();
+            NewUser nU = new NewUser();
+            nU.ShowDialog();
+            this.Close();
         }
         /*Purpose: To deal with when the username is changed*/
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             username = textBox2.Text;
         }
+
         /*Purpose: To deal with when the password is changed*/
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
