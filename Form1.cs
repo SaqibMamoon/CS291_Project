@@ -33,6 +33,8 @@ namespace CS291_Project
 			button11.Text = "";
 			button12.Text = "Predictions for future rentals";
 			startDate = DateTime.Now; endDate = DateTime.Now;
+
+
 		}
 		/*Purpose: This sets start date*/
 		private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
