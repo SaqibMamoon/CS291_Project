@@ -140,15 +140,25 @@ namespace CS291_Project
                                                                     "Integrated Security=True"))
                 {
                     connection.Open();
-
                     SqlCommand command = new SqlCommand();
                     command.Connection = connection;
 
+                    // Insert customer information
                     command.CommandText = "insert into customer (first_name, last_name, gold_star) " +
-                                          "values (@first_name, @last_name, @gold_star)";
+                                          "values (@first_name, @last_name, @gold_star); " +
+                                          "select SCOPE_IDENTITY()";
                     command.Parameters.AddWithValue("@first_name", textBox3.Text);
                     command.Parameters.AddWithValue("@last_name", textBox4.Text);
                     command.Parameters.AddWithValue("@gold_star", 0);
+                    // Save the newly created ID to store in the user_info table
+                    int customer_id = Convert.ToInt32(command.ExecuteScalar());
+
+                    // Insert user information
+                    command.CommandText = "insert into user_info (user_id, password, customer_id) " +
+                                          "values (@user_id, @password, @customer_id);";
+                    command.Parameters.AddWithValue("@user_id", textBox1.Text);
+                    command.Parameters.AddWithValue("@password", textBox2.Text);
+                    command.Parameters.AddWithValue("@customer_id", customer_id);
                     command.ExecuteNonQuery();
 
                     connection.Close();
