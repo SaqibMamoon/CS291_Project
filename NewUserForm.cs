@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace CS291_Project
 {
-    public partial class NewUser : Form
+    public partial class NewUserForm : Form
     {
         string accType;
-        public NewUser()
+        public NewUserForm()
         {
             InitializeComponent();
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -115,7 +115,7 @@ namespace CS291_Project
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Form3 nU = new Form3();
+            LoginForm nU = new LoginForm();
             nU.ShowDialog();
             this.Close();
         }
@@ -134,7 +134,7 @@ namespace CS291_Project
                 else
                 {
                     this.Hide();
-                    Form3 nU = new Form3();
+                    LoginForm nU = new LoginForm();
                     nU.ShowDialog();
                     this.Close();
                 }
@@ -149,7 +149,7 @@ namespace CS291_Project
                 else
                 {
                     this.Hide();
-                    Form3 nU = new Form3();
+                    LoginForm nU = new LoginForm();
                     nU.ShowDialog();
                     this.Close();
                 }

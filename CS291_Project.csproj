@@ -62,34 +62,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form2.cs">
+    <Compile Include="ChartsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <Compile Include="ChartsForm.Designer.cs">
+      <DependentUpon>ChartsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form3.cs">
+    <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form3.Designer.cs">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewUser.cs">
+    <Compile Include="NewUserForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewUser.Designer.cs">
-      <DependentUpon>NewUser.cs</DependentUpon>
+    <Compile Include="NewUserForm.Designer.cs">
+      <DependentUpon>NewUserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <EmbeddedResource Include="ChartsForm.resx">
+      <DependentUpon>ChartsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form3.resx">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewUser.resx">
-      <DependentUpon>NewUser.cs</DependentUpon>
+    <EmbeddedResource Include="NewUserForm.resx">
+      <DependentUpon>NewUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
