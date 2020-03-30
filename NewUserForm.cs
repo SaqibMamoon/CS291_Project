@@ -122,53 +122,25 @@ namespace CS291_Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-            bool chec;
-            
-            if (label5.Visible == true)
+            if (!textBoxesFilled())
             {
-                chec = checkInput(true);
-                if (!chec)
-                {
-                    label6.Show();
-                }
-                else
-                {
-                    this.Hide();
-                    LoginForm nU = new LoginForm();
-                    nU.ShowDialog();
-                    this.Close();
-                }
+                label6.Show();
             }
             else
             {
-                chec = checkInput(false);
-                if (!chec)
-                {
-                    label6.Show();
-                }
-                else
-                {
-                    this.Hide();
-                    LoginForm nU = new LoginForm();
-                    nU.ShowDialog();
-                    this.Close();
-                }
-
+                this.Hide();
+                LoginForm nU = new LoginForm();
+                nU.ShowDialog();
+                this.Close();
             }
         }
 
-        private bool checkInput(bool l5)
+        private bool textBoxesFilled()
         {
-            if (textBox1.TextLength > 0 && textBox2.TextLength > 0 && 
-                textBox3.TextLength > 0 && textBox4.TextLength > 0){ }
-            else
+            TextBox[] allTextBoxes = { textBox1, textBox2, textBox3, textBox4, textBox5 };
+            foreach (TextBox textBox in allTextBoxes)
             {
-                return false;
-            }
-            if (l5)
-            {
-                if (textBox5.TextLength > 0){ }
-                else
+                if (textBox.Visible == true && textBox.TextLength <= 0)
                 {
                     return false;
                 }
