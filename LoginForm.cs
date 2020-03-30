@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace CS291_Project
 {
-    public partial class Form3 : Form
+    public partial class LoginForm : Form
     {
         string username, password;
-        public Form3()
+        public LoginForm()
         {
             /*
             int width = Screen.PrimaryScreen.WorkingArea.Width / 4, 
@@ -50,7 +50,7 @@ namespace CS291_Project
             //Here we will place the check. We can establish multiple different methods for storing users.
             
             this.Hide();
-            Form2 m = new Form2();
+            ChartsForm m = new ChartsForm();
             m.ShowDialog();
             this.Close();
         }
@@ -59,7 +59,7 @@ namespace CS291_Project
         {
 
             this.Hide();
-            NewUser nU = new NewUser();
+            NewUserForm nU = new NewUserForm();
             nU.ShowDialog();
             this.Close();
         }

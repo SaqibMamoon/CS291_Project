@@ -1,6 +1,6 @@
 ﻿namespace CS291_Project
 {
-    partial class NewUser
+    partial class NewUserForm
     {
         /// <summary>
         /// Required designer variable.

@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace CS291_Project
 {
-    public partial class Form2 : Form
+    public partial class ChartsForm : Form
     {
 
         DateTime startDate, endDate;
 
-        public Form2()
+        public ChartsForm()
         {
             InitializeComponent();
             label1.Text = "Start Date";
