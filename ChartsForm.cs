@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,9 @@ namespace CS291_Project
     {
 
         DateTime startDate, endDate;
+        SqlConnection connection;
+        SqlDataAdapter adapter;
+        DataTable dataTable;
 
         public ChartsForm()
         {
@@ -33,8 +37,6 @@ namespace CS291_Project
             button11.Text = "";
             button12.Text = "Predictions for future rentals";
             button13.Text = "";
-            button14.Text = "";
-            button15.Text = "";
             startDate = DateTime.Now; endDate = DateTime.Now;
         }
 
@@ -108,17 +110,24 @@ namespace CS291_Project
 
         }
 
+        private void tablesComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            using (connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                                                                    "AttachDbFilename=C:\\Users\\PC\\Source\\Repos\\efirdc\\CS291_Project\\Database1.mdf;" +
+                                                                    "Integrated Security=True"))
+            {
+                connection.Open();
+                
+                adapter = new SqlDataAdapter("select * from " + tablesComboBox.Text, connection);
+                dataTable = new DataTable();
+                adapter.Fill(dataTable);
+                tableDataGridView.DataSource = dataTable;
+
+                connection.Close();
+            }
+        }
+
         private void button13_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button15_Click(object sender, EventArgs e)
         {
 
         }
