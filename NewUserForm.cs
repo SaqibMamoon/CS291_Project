@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -128,6 +129,24 @@ namespace CS291_Project
             }
             else
             {
+                using (SqlConnection connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                                                                    "AttachDbFilename=C:\\Users\\PC\\Source\\Repos\\efirdc\\CS291_Project\\Database1.mdf;" +
+                                                                    "Integrated Security=True"))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = connection;
+
+                    command.CommandText = "insert into customer (first_name, last_name, gold_star) " +
+                                          "values (@first_name, @last_name, @gold_star)";
+                    command.Parameters.AddWithValue("@first_name", textBox3.Text);
+                    command.Parameters.AddWithValue("@last_name", textBox4.Text);
+                    command.Parameters.AddWithValue("@gold_star", 0);
+                    command.ExecuteNonQuery();
+
+                    connection.Close();
+                }
+
                 this.Hide();
                 LoginForm nU = new LoginForm();
                 nU.ShowDialog();
