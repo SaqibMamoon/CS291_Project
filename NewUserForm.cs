@@ -17,6 +17,12 @@ namespace CS291_Project
         public NewUserForm()
         {
             InitializeComponent();
+
+            // Define path and DataDirectory to access the database later
+            string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string path = (System.IO.Path.GetDirectoryName(executable));
+            AppDomain.CurrentDomain.SetData("DataDirectory", path);
+
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.Items.Add("Customer");
             comboBox1.Items.Add("Employee");
@@ -130,10 +136,11 @@ namespace CS291_Project
             else
             {
                 using (SqlConnection connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
-                                                                    "AttachDbFilename=C:\\Users\\PC\\Source\\Repos\\efirdc\\CS291_Project\\Database1.mdf;" +
+                                                                    "AttachDbFilename=|DataDirectory|Database1.mdf;" +
                                                                     "Integrated Security=True"))
                 {
                     connection.Open();
+
                     SqlCommand command = new SqlCommand();
                     command.Connection = connection;
 

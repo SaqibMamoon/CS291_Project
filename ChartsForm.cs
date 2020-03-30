@@ -22,6 +22,12 @@ namespace CS291_Project
         public ChartsForm()
         {
             InitializeComponent();
+
+            // Define path and DataDirectory to access the database later
+            string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string path = (System.IO.Path.GetDirectoryName(executable));
+            AppDomain.CurrentDomain.SetData("DataDirectory", path);
+
             label1.Text = "Start Date";
             label2.Text = "End Date";
             button1.Text = "Per Branch Rented Cars";
@@ -113,7 +119,7 @@ namespace CS291_Project
         private void tablesComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             using (connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
-                                                                    "AttachDbFilename=C:\\Users\\PC\\Source\\Repos\\efirdc\\CS291_Project\\Database1.mdf;" +
+                                                                    "AttachDbFilename=|DataDirectory|Database1.mdf;" +
                                                                     "Integrated Security=True"))
             {
                 connection.Open();
