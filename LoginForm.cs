@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace CS291_Project
@@ -48,12 +49,46 @@ namespace CS291_Project
         private void button1_Click(object sender, EventArgs e)
         {
             //Here we will place the check. We can establish multiple different methods for storing users.
-            
-            this.Hide();
-            ChartsForm m = new ChartsForm();
-            m.ShowDialog();
-            this.Close();
+            using (SqlConnection connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                                                                    "AttachDbFilename=|DataDirectory|Database1.mdf;" +
+                                                                    "Integrated Security=True"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("select customer_id, employee_id from user_info where (user_info.user_id = @user_id1 and user_info.password = @pw)", 
+                    connection);
+                command.Parameters.AddWithValue("@user_id1", username);
+                command.Parameters.AddWithValue("@pw", password);
+
+                using(SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Customer c = new Customer(); ChartsForm cF = new ChartsForm();
+                        try
+                        {
+                            int first = int.Parse(reader[0].ToString());
+                            label1.Text = first.ToString();
+                        }
+                        catch
+                        {
+                            int second = int.Parse(reader[1].ToString());
+                            label2.Text = second.ToString();
+                        }
+                    }
+                }
+                
+                connection.Close();
+            }
         }
+
+        private bool changePage(Form f)
+        {
+            this.Hide();
+            f.ShowDialog();
+            this.Close();
+            return false;
+        }
+
         /*Purpose: To open new window for a new user*/
         private void button2_Click(object sender, EventArgs e)
         {
