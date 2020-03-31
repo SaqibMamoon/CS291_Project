@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,10 +15,19 @@ namespace CS291_Project
     {
 
         DateTime startDate, endDate;
+        SqlConnection connection;
+        SqlDataAdapter adapter;
+        DataTable dataTable;
 
         public ChartsForm()
         {
             InitializeComponent();
+
+            // Define path and DataDirectory to access the database later
+            string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string path = (System.IO.Path.GetDirectoryName(executable));
+            AppDomain.CurrentDomain.SetData("DataDirectory", path);
+
             label1.Text = "Start Date";
             label2.Text = "End Date";
             button1.Text = "Per Branch Rented Cars";
@@ -33,9 +43,10 @@ namespace CS291_Project
             button11.Text = "";
             button12.Text = "Predictions for future rentals";
             button13.Text = "";
-            button14.Text = "";
-            button15.Text = "";
             startDate = DateTime.Now; endDate = DateTime.Now;
+
+            // Set the ComboBox to the first option by default
+            tablesComboBox.SelectedIndex = 0;
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -113,14 +124,55 @@ namespace CS291_Project
 
         }
 
-        private void button14_Click(object sender, EventArgs e)
+        private void tablesComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            updateTable();
         }
 
-        private void button15_Click(object sender, EventArgs e)
+        private void clearTablesButton_Click(object sender, EventArgs e)
         {
+            using (connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                                                                    "AttachDbFilename=|DataDirectory|Database1.mdf;" +
+                                                                    "Integrated Security=True"))
+            {
+                connection.Open();
 
+                for (int i = 0; i < tablesComboBox.Items.Count; i++)
+                {
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = connection;
+                    command.CommandText = "delete from " + tablesComboBox.Items[i].ToString();
+                    command.ExecuteNonQuery();
+                }
+
+                connection.Close();
+            }
+            updateTable();
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            LoginForm nU = new LoginForm();
+            nU.ShowDialog();
+            this.Close();
+        }
+
+        private void updateTable()
+        {
+            using (connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                                                                    "AttachDbFilename=|DataDirectory|Database1.mdf;" +
+                                                                    "Integrated Security=True"))
+            {
+                connection.Open();
+
+                adapter = new SqlDataAdapter("select * from " + tablesComboBox.Text, connection);
+                dataTable = new DataTable();
+                adapter.Fill(dataTable);
+                tableDataGridView.DataSource = dataTable;
+
+                connection.Close();
+            }
         }
     }
 }
