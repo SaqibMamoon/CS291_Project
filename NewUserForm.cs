@@ -71,8 +71,9 @@ namespace CS291_Project
             textBox2.TabIndex = 2;
             textBox3.TabIndex = 3;
             textBox4.TabIndex = 4;
-            button1.TabIndex = 5;
-            button2.TabIndex = 6;
+            textBox5.TabIndex = 5;
+            button1.TabIndex = 6;
+            button2.TabIndex = 7;
 
             label1.Hide();
             label2.Hide();
@@ -151,23 +152,47 @@ namespace CS291_Project
                     // If < 0 then user_id does not exist
                     if (userCount == 0)
                     {
-                        // Insert customer information
-                        command.CommandText = "insert into customer (first_name, last_name, gold_star) " +
-                                              "values (@first_name, @last_name, @gold_star); " +
-                                              "select SCOPE_IDENTITY()";
-                        command.Parameters.AddWithValue("@first_name", textBox3.Text);
-                        command.Parameters.AddWithValue("@last_name", textBox4.Text);
-                        command.Parameters.AddWithValue("@gold_star", 0);
-                        // Save the newly created ID to store in the user_info table
-                        int customer_id = Convert.ToInt32(command.ExecuteScalar());
+                        if (comboBox1.SelectedIndex == 0)
+                        {
+                            // Insert customer information
+                            command.CommandText = "insert into customer (first_name, last_name, gold_star) " +
+                                                  "values (@first_name, @last_name, @gold_star); " +
+                                                  "select SCOPE_IDENTITY()";
+                            command.Parameters.AddWithValue("@first_name", textBox3.Text);
+                            command.Parameters.AddWithValue("@last_name", textBox4.Text);
+                            command.Parameters.AddWithValue("@gold_star", 0);
+                            // Save the newly created ID to store in the user_info table
+                            int customer_id = Convert.ToInt32(command.ExecuteScalar());
 
-                        // Insert user information
-                        command.CommandText = "insert into user_info (user_id, password, customer_id) " +
-                                              "values (@user_id2, @password, @customer_id);";
-                        command.Parameters.AddWithValue("@user_id2", textBox1.Text);
-                        command.Parameters.AddWithValue("@password", textBox2.Text);
-                        command.Parameters.AddWithValue("@customer_id", customer_id);
-                        command.ExecuteNonQuery();
+                            // Insert user information
+                            command.CommandText = "insert into user_info (user_id, password, customer_id) " +
+                                                  "values (@user_id2, @password, @customer_id);";
+                            command.Parameters.AddWithValue("@user_id2", textBox1.Text);
+                            command.Parameters.AddWithValue("@password", textBox2.Text);
+                            command.Parameters.AddWithValue("@customer_id", customer_id);
+                            command.ExecuteNonQuery();
+                        }
+
+                        else
+                        {
+                            // Insert customer information
+                            command.CommandText = "insert into employee (employee_FName, employee_LName, branch_id) " +
+                                                  "values (@first_name, @last_name, @branch_id); " +
+                                                  "select SCOPE_IDENTITY()";
+                            command.Parameters.AddWithValue("@first_name", textBox3.Text);
+                            command.Parameters.AddWithValue("@last_name", textBox4.Text);
+                            command.Parameters.AddWithValue("@branch_id", textBox5.Text);
+                            // Save the newly created ID to store in the user_info table
+                            int employee_id = Convert.ToInt32(command.ExecuteScalar());
+
+                            // Insert user information
+                            command.CommandText = "insert into user_info (user_id, password, employee_id) " +
+                                                  "values (@user_id2, @password, @employee_id);";
+                            command.Parameters.AddWithValue("@user_id2", textBox1.Text);
+                            command.Parameters.AddWithValue("@password", textBox2.Text);
+                            command.Parameters.AddWithValue("@employee_id", employee_id);
+                            command.ExecuteNonQuery();
+                        }
 
                         connection.Close();
 

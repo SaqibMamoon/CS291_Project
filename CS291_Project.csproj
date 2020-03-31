@@ -70,6 +70,12 @@
     <Compile Include="ChartsForm.Designer.cs">
       <DependentUpon>ChartsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Customer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer.Designer.cs">
+      <DependentUpon>Customer.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
