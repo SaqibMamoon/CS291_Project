@@ -63,16 +63,19 @@ namespace CS291_Project
                 {
                     while (reader.Read())
                     {
-                        Customer c = new Customer(); ChartsForm cF = new ChartsForm();
-                        try
+                        if (reader[0].ToString().Length > 0)
                         {
-                            int first = int.Parse(reader[0].ToString());
-                            label1.Text = first.ToString();
+                            Customer c = new Customer();
+                            changePage(c);
                         }
-                        catch
+                        else if (reader[1].ToString().Length > 0)
                         {
-                            int second = int.Parse(reader[1].ToString());
-                            label2.Text = second.ToString();
+                            ChartsForm cF = new ChartsForm();
+                            changePage(cF);
+                        }
+                        else
+                        {
+                            MessageBox.Show("User does not exist in system.");
                         }
                     }
                 }
@@ -81,12 +84,11 @@ namespace CS291_Project
             }
         }
 
-        private bool changePage(Form f)
+        private void changePage(Form f)
         {
             this.Hide();
             f.ShowDialog();
             this.Close();
-            return false;
         }
 
         /*Purpose: To open new window for a new user*/
