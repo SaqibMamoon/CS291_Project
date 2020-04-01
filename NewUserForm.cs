@@ -175,23 +175,30 @@ namespace CS291_Project
 
                         else
                         {
-                            // Insert customer information
-                            command.CommandText = "insert into employee (employee_FName, employee_LName, branch_id) " +
-                                                  "values (@first_name, @last_name, @branch_id); " +
-                                                  "select SCOPE_IDENTITY()";
-                            command.Parameters.AddWithValue("@first_name", textBox3.Text);
-                            command.Parameters.AddWithValue("@last_name", textBox4.Text);
-                            command.Parameters.AddWithValue("@branch_id", textBox5.Text);
-                            // Save the newly created ID to store in the user_info table
-                            int employee_id = Convert.ToInt32(command.ExecuteScalar());
+                            try
+                            {
+                                // Insert employee information
+                                command.CommandText = "insert into employee (employee_FName, employee_LName, branch_id) " +
+                                                      "values (@first_name, @last_name, @branch_id); " +
+                                                      "select SCOPE_IDENTITY()";
+                                command.Parameters.AddWithValue("@first_name", textBox3.Text);
+                                command.Parameters.AddWithValue("@last_name", textBox4.Text);
+                                command.Parameters.AddWithValue("@branch_id", textBox5.Text);
+                                // Save the newly created ID to store in the user_info table
+                                int employee_id = Convert.ToInt32(command.ExecuteScalar());
 
-                            // Insert user information
-                            command.CommandText = "insert into user_info (user_id, password, employee_id) " +
-                                                  "values (@user_id2, @password, @employee_id);";
-                            command.Parameters.AddWithValue("@user_id2", textBox1.Text);
-                            command.Parameters.AddWithValue("@password", textBox2.Text);
-                            command.Parameters.AddWithValue("@employee_id", employee_id);
-                            command.ExecuteNonQuery();
+                                // Insert user information
+                                command.CommandText = "insert into user_info (user_id, password, employee_id) " +
+                                                      "values (@user_id2, @password, @employee_id);";
+                                command.Parameters.AddWithValue("@user_id2", textBox1.Text);
+                                command.Parameters.AddWithValue("@password", textBox2.Text);
+                                command.Parameters.AddWithValue("@employee_id", employee_id);
+                                command.ExecuteNonQuery();
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Branch doesn't exist.");
+                            }
                         }
 
                         connection.Close();
