@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chartsTc = new System.Windows.Forms.TabControl();
             this.Charts = new System.Windows.Forms.TabPage();
+            this.button16 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.button13 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
@@ -69,7 +72,7 @@
             this.chartsTc.Controls.Add(this.Charts);
             this.chartsTc.Controls.Add(this.Tables);
             this.chartsTc.Location = new System.Drawing.Point(17, 16);
-            this.chartsTc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chartsTc.Margin = new System.Windows.Forms.Padding(4);
             this.chartsTc.Name = "chartsTc";
             this.chartsTc.SelectedIndex = 0;
             this.chartsTc.Size = new System.Drawing.Size(1119, 604);
@@ -77,6 +80,9 @@
             // 
             // Charts
             // 
+            this.Charts.Controls.Add(this.button16);
+            this.Charts.Controls.Add(this.button15);
+            this.Charts.Controls.Add(this.button14);
             this.Charts.Controls.Add(this.chart1);
             this.Charts.Controls.Add(this.button13);
             this.Charts.Controls.Add(this.button12);
@@ -96,34 +102,65 @@
             this.Charts.Controls.Add(this.label2);
             this.Charts.Controls.Add(this.label1);
             this.Charts.Location = new System.Drawing.Point(4, 25);
-            this.Charts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Charts.Margin = new System.Windows.Forms.Padding(4);
             this.Charts.Name = "Charts";
-            this.Charts.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Charts.Padding = new System.Windows.Forms.Padding(4);
             this.Charts.Size = new System.Drawing.Size(1111, 575);
             this.Charts.TabIndex = 0;
             this.Charts.Text = "Charts";
             this.Charts.UseVisualStyleBackColor = true;
             // 
+            // button16
+            // 
+            this.button16.Location = new System.Drawing.Point(56, 474);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(276, 23);
+            this.button16.TabIndex = 42;
+            this.button16.Text = "button16";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.b16C);
+            // 
+            // button15
+            // 
+            this.button15.Location = new System.Drawing.Point(56, 447);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(276, 23);
+            this.button15.TabIndex = 41;
+            this.button15.Text = "button15";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.b15C);
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(56, 417);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(276, 23);
+            this.button14.TabIndex = 40;
+            this.button14.Text = "button14";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.b14C);
+            // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(425, 84);
             this.chart1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(604, 414);
             this.chart1.TabIndex = 39;
             this.chart1.Text = "chart1";
+            this.chart1.Click += new System.EventHandler(this.chart1_Click);
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(56, 503);
+            this.button13.Location = new System.Drawing.Point(56, 388);
             this.button13.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(276, 23);
@@ -134,7 +171,7 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(56, 474);
+            this.button12.Location = new System.Drawing.Point(56, 361);
             this.button12.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(276, 23);
@@ -145,7 +182,7 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(56, 444);
+            this.button11.Location = new System.Drawing.Point(56, 334);
             this.button11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(276, 23);
@@ -156,7 +193,7 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(56, 415);
+            this.button10.Location = new System.Drawing.Point(56, 307);
             this.button10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(276, 23);
@@ -167,7 +204,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(56, 384);
+            this.button9.Location = new System.Drawing.Point(56, 280);
             this.button9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(276, 23);
@@ -178,7 +215,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(56, 353);
+            this.button8.Location = new System.Drawing.Point(56, 253);
             this.button8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(276, 23);
@@ -189,7 +226,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(56, 325);
+            this.button7.Location = new System.Drawing.Point(56, 226);
             this.button7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(276, 23);
@@ -200,10 +237,10 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(56, 294);
+            this.button6.Location = new System.Drawing.Point(199, 199);
             this.button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(276, 23);
+            this.button6.Size = new System.Drawing.Size(133, 23);
             this.button6.TabIndex = 29;
             this.button6.Text = "button6";
             this.button6.UseVisualStyleBackColor = true;
@@ -211,10 +248,10 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(56, 265);
+            this.button5.Location = new System.Drawing.Point(56, 199);
             this.button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(276, 23);
+            this.button5.Size = new System.Drawing.Size(137, 23);
             this.button5.TabIndex = 28;
             this.button5.Text = "button5";
             this.button5.UseVisualStyleBackColor = true;
@@ -222,10 +259,10 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(56, 234);
+            this.button4.Location = new System.Drawing.Point(199, 172);
             this.button4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(276, 23);
+            this.button4.Size = new System.Drawing.Size(133, 23);
             this.button4.TabIndex = 27;
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
@@ -233,21 +270,21 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(56, 204);
+            this.button3.Location = new System.Drawing.Point(56, 172);
             this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(276, 23);
+            this.button3.Size = new System.Drawing.Size(137, 23);
             this.button3.TabIndex = 26;
             this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true; 
+            this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.b3C);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(56, 175);
+            this.button2.Location = new System.Drawing.Point(199, 145);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(276, 23);
+            this.button2.Size = new System.Drawing.Size(133, 23);
             this.button2.TabIndex = 25;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
@@ -258,7 +295,7 @@
             this.button1.Location = new System.Drawing.Point(56, 145);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(276, 23);
+            this.button1.Size = new System.Drawing.Size(137, 23);
             this.button1.TabIndex = 24;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
@@ -305,9 +342,9 @@
             this.Tables.Controls.Add(this.tablesComboBox);
             this.Tables.Controls.Add(this.tableDataGridView);
             this.Tables.Location = new System.Drawing.Point(4, 25);
-            this.Tables.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Tables.Margin = new System.Windows.Forms.Padding(4);
             this.Tables.Name = "Tables";
-            this.Tables.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Tables.Padding = new System.Windows.Forms.Padding(4);
             this.Tables.Size = new System.Drawing.Size(1111, 575);
             this.Tables.TabIndex = 1;
             this.Tables.Text = "Tables";
@@ -316,7 +353,7 @@
             // saveTableButton
             // 
             this.saveTableButton.Location = new System.Drawing.Point(8, 539);
-            this.saveTableButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.saveTableButton.Margin = new System.Windows.Forms.Padding(4);
             this.saveTableButton.Name = "saveTableButton";
             this.saveTableButton.Size = new System.Drawing.Size(169, 28);
             this.saveTableButton.TabIndex = 3;
@@ -327,7 +364,7 @@
             // clearTablesButton
             // 
             this.clearTablesButton.Location = new System.Drawing.Point(1000, 539);
-            this.clearTablesButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.clearTablesButton.Margin = new System.Windows.Forms.Padding(4);
             this.clearTablesButton.Name = "clearTablesButton";
             this.clearTablesButton.Size = new System.Drawing.Size(100, 28);
             this.clearTablesButton.TabIndex = 2;
@@ -350,7 +387,7 @@
             "pricing_model",
             "rental"});
             this.tablesComboBox.Location = new System.Drawing.Point(471, 539);
-            this.tablesComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tablesComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.tablesComboBox.Name = "tablesComboBox";
             this.tablesComboBox.Size = new System.Drawing.Size(160, 24);
             this.tablesComboBox.TabIndex = 1;
@@ -360,7 +397,7 @@
             // 
             this.tableDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableDataGridView.Location = new System.Drawing.Point(8, 7);
-            this.tableDataGridView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableDataGridView.Margin = new System.Windows.Forms.Padding(4);
             this.tableDataGridView.Name = "tableDataGridView";
             this.tableDataGridView.RowHeadersWidth = 51;
             this.tableDataGridView.Size = new System.Drawing.Size(1092, 524);
@@ -369,7 +406,7 @@
             // backButton
             // 
             this.backButton.Location = new System.Drawing.Point(1027, 7);
-            this.backButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.backButton.Margin = new System.Windows.Forms.Padding(4);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(100, 28);
             this.backButton.TabIndex = 1;
@@ -425,5 +462,8 @@
         private System.Windows.Forms.Button clearTablesButton;
         private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.Button saveTableButton;
+        private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button button16;
     }
 }
