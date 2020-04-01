@@ -32,18 +32,18 @@ namespace CS291_Project
 
             label1.Text = "Start Date";
             label2.Text = "End Date";
-            button1.Text = "Per Branch Rented Cars";
-            button2.Text = "Per Branch car rentals per type";
-            button3.Text = "";
-            button4.Text = "";
-            button5.Text = "";
-            button6.Text = "";
-            button7.Text = "";
-            button8.Text = "";
-            button9.Text = "";
-            button10.Text = "";
+            button1.Text = "Colors";
+            button2.Text = "Doors";
+            button3.Text = "Cylinders in Engine";
+            button4.Text = "Heated Seats";
+            button5.Text = "Style";
+            button6.Text = "Stereo Quality";
+            button7.Text = "Daily Prices";
+            button8.Text = "Weekly Prices";
+            button9.Text = "Monthly Prices";
+            button10.Text = "Age";
             button11.Text = "";
-            button12.Text = "Predictions for future rentals";
+            button12.Text = "";
             button13.Text = "";
             
             button1.BackColor = Color.Red; but1 = false;
