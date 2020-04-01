@@ -54,7 +54,7 @@ namespace CS291_Project
                                                                     "Integrated Security=True"))
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand("select customer_id, employee_id from user_info where (user_info.user_id = @user_id1 and user_info.password = @pw)", 
+                SqlCommand command = new SqlCommand("select customer_id, employee_id, admin_id from user_info where (user_info.user_id = @user_id1 and user_info.password = @pw)", 
                     connection);
                 command.Parameters.AddWithValue("@user_id1", username);
                 command.Parameters.AddWithValue("@pw", password);
@@ -69,6 +69,11 @@ namespace CS291_Project
                             changePage(c);
                         }
                         else if (reader[1].ToString().Length > 0)
+                        {
+                            ChartsForm cF = new ChartsForm();
+                            changePage(cF);
+                        }
+                        else if (reader[2].ToString().Length > 0)
                         {
                             ChartsForm cF = new ChartsForm();
                             changePage(cF);

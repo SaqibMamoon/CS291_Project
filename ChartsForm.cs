@@ -19,6 +19,7 @@ namespace CS291_Project
         SqlDataAdapter adapter;
         DataTable dataTable;
         BindingSource bindingSource;
+        bool but1, but2, but3, but4, but5, but6, but7, but8, but9, but10, but11, but12, but13;
 
         public ChartsForm()
         {
@@ -44,6 +45,21 @@ namespace CS291_Project
             button11.Text = "";
             button12.Text = "Predictions for future rentals";
             button13.Text = "";
+            
+            button1.BackColor = Color.Red; but1 = false;
+            button2.BackColor = Color.Red; but2 = false;
+            button3.BackColor = Color.Red; but3 = false;
+            button4.BackColor = Color.Red; but4 = false;
+            button5.BackColor = Color.Red; but5 = false;
+            button6.BackColor = Color.Red; but6 = false;
+            button7.BackColor = Color.Red; but7 = false;
+            button8.BackColor = Color.Red; but8 = false;
+            button9.BackColor = Color.Red; but9 = false;
+            button10.BackColor = Color.Red; but10 = false;
+            button11.BackColor = Color.Red; but11 = false;
+            button12.BackColor = Color.Red; but12 = false; 
+            button13.BackColor = Color.Red; but13 = false;
+
             startDate = DateTime.Now; endDate = DateTime.Now;
 
             // Set the ComboBox to the first option by default
@@ -60,71 +76,176 @@ namespace CS291_Project
             this.endDate = dateTimePicker2.Value;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void b1C(object sender, EventArgs e)
         {
-
+            if (but1)
+            {
+                button1.BackColor = Color.Red;
+                but1 = false;
+            }
+            else
+            {
+                button1.BackColor = Color.Green;
+                but1 = true;
+            }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void b2C(object sender, EventArgs e)
         {
-
+            if (but2)
+            {
+                button2.BackColor = Color.Red;
+                but2 = false;
+            }
+            else
+            {
+                button2.BackColor = Color.Green;
+                but2 = true;
+            }
         }
-
-        private void button3_Click(object sender, EventArgs e)
+        private void b3C(object sender, EventArgs e)
         {
-
+            if (but3)
+            {
+                button3.BackColor = Color.Red;
+                but3 = false;
+            }
+            else
+            {
+                button3.BackColor = Color.Green;
+                but3 = true;
+            }
         }
-
-        private void button4_Click(object sender, EventArgs e)
+        private void b4C(object sender, EventArgs e)
         {
-
+            if (but4)
+            {
+                button4.BackColor = Color.Red;
+                but4 = false;
+            }
+            else
+            {
+                button4.BackColor = Color.Green;
+                but4 = true;
+            }
         }
-
-        private void button5_Click(object sender, EventArgs e)
+        private void b5C(object sender, EventArgs e)
         {
-
+            if (but5)
+            {
+                button5.BackColor = Color.Red;
+                but5 = false;
+            }
+            else
+            {
+                button5.BackColor = Color.Green;
+                but5 = true;
+            }
         }
-
-        private void button6_Click(object sender, EventArgs e)
+        private void b6C(object sender, EventArgs e)
         {
-
+            if (but6)
+            {
+                button6.BackColor = Color.Red;
+                but6 = false;
+            }
+            else
+            {
+                button6.BackColor = Color.Green;
+                but6 = true;
+            }
         }
-
-        private void button7_Click(object sender, EventArgs e)
+        private void b7C(object sender, EventArgs e)
         {
-
+            if (but7)
+            {
+                button7.BackColor = Color.Red;
+                but7 = false;
+            }
+            else
+            {
+                button7.BackColor = Color.Green;
+                but7 = true;
+            }
         }
-
-        private void button8_Click(object sender, EventArgs e)
+        private void b8C(object sender, EventArgs e)
         {
-
+            if (but8)
+            {
+                button8.BackColor = Color.Red;
+                but8 = false;
+            }
+            else
+            {
+                button8.BackColor = Color.Green;
+                but8 = true;
+            }
         }
-
-        private void button9_Click(object sender, EventArgs e)
+        private void b9C(object sender, EventArgs e)
         {
-
+            if (but9)
+            {
+                button9.BackColor = Color.Red;
+                but9 = false;
+            }
+            else
+            {
+                button9.BackColor = Color.Green;
+                but9 = true;
+            }
         }
-
-        private void button10_Click(object sender, EventArgs e)
+        private void b10C(object sender, EventArgs e)
         {
-
+            if (but10)
+            {
+                button10.BackColor = Color.Red;
+                but10 = false;
+            }
+            else
+            {
+                button10.BackColor = Color.Green;
+                but10 = true;
+            }
         }
-
-        private void button11_Click(object sender, EventArgs e)
+        private void b11C(object sender, EventArgs e)
         {
-
+            if (but11)
+            {
+                button11.BackColor = Color.Red;
+                but11 = false;
+            }
+            else
+            {
+                button11.BackColor = Color.Green;
+                but11 = true;
+            }
         }
-
-        private void button12_Click(object sender, EventArgs e)
+        private void b12C(object sender, EventArgs e)
         {
-
+            if (but12)
+            {
+                button12.BackColor = Color.Red;
+                but12 = false;
+            }
+            else
+            {
+                button12.BackColor = Color.Green;
+                but12 = true;
+            }
         }
-
-        private void button13_Click(object sender, EventArgs e)
+        private void b13C(object sender, EventArgs e)
         {
-
+            if (but13)
+            {
+                button13.BackColor = Color.Red;
+                but13 = false;
+            }
+            else
+            {
+                button13.BackColor = Color.Green;
+                but13 = true;
+            }
         }
-
         private void tablesComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             updateTable();
