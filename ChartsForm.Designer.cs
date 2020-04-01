@@ -52,10 +52,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.Tables = new System.Windows.Forms.TabPage();
+            this.clearTablesButton = new System.Windows.Forms.Button();
             this.tablesComboBox = new System.Windows.Forms.ComboBox();
             this.tableDataGridView = new System.Windows.Forms.DataGridView();
-            this.clearTablesButton = new System.Windows.Forms.Button();
             this.backButton = new System.Windows.Forms.Button();
+            this.saveTableButton = new System.Windows.Forms.Button();
             this.chartsTc.SuspendLayout();
             this.Charts.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -286,6 +287,7 @@
             // 
             // Tables
             // 
+            this.Tables.Controls.Add(this.saveTableButton);
             this.Tables.Controls.Add(this.clearTablesButton);
             this.Tables.Controls.Add(this.tablesComboBox);
             this.Tables.Controls.Add(this.tableDataGridView);
@@ -296,6 +298,16 @@
             this.Tables.TabIndex = 1;
             this.Tables.Text = "Tables";
             this.Tables.UseVisualStyleBackColor = true;
+            // 
+            // clearTablesButton
+            // 
+            this.clearTablesButton.Location = new System.Drawing.Point(750, 438);
+            this.clearTablesButton.Name = "clearTablesButton";
+            this.clearTablesButton.Size = new System.Drawing.Size(75, 23);
+            this.clearTablesButton.TabIndex = 2;
+            this.clearTablesButton.Text = "Clear Tables";
+            this.clearTablesButton.UseVisualStyleBackColor = true;
+            this.clearTablesButton.Click += new System.EventHandler(this.clearTablesButton_Click);
             // 
             // tablesComboBox
             // 
@@ -325,16 +337,6 @@
             this.tableDataGridView.Size = new System.Drawing.Size(819, 426);
             this.tableDataGridView.TabIndex = 0;
             // 
-            // clearTablesButton
-            // 
-            this.clearTablesButton.Location = new System.Drawing.Point(750, 438);
-            this.clearTablesButton.Name = "clearTablesButton";
-            this.clearTablesButton.Size = new System.Drawing.Size(75, 23);
-            this.clearTablesButton.TabIndex = 2;
-            this.clearTablesButton.Text = "Clear Tables";
-            this.clearTablesButton.UseVisualStyleBackColor = true;
-            this.clearTablesButton.Click += new System.EventHandler(this.clearTablesButton_Click);
-            // 
             // backButton
             // 
             this.backButton.Location = new System.Drawing.Point(770, 6);
@@ -344,6 +346,16 @@
             this.backButton.Text = "Back";
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            // 
+            // saveTableButton
+            // 
+            this.saveTableButton.Location = new System.Drawing.Point(6, 438);
+            this.saveTableButton.Name = "saveTableButton";
+            this.saveTableButton.Size = new System.Drawing.Size(127, 23);
+            this.saveTableButton.TabIndex = 3;
+            this.saveTableButton.Text = "Save Table Changes";
+            this.saveTableButton.UseVisualStyleBackColor = true;
+            this.saveTableButton.Click += new System.EventHandler(this.saveTableButton_Click);
             // 
             // ChartsForm
             // 
@@ -392,5 +404,6 @@
         private System.Windows.Forms.DataGridView tableDataGridView;
         private System.Windows.Forms.Button clearTablesButton;
         private System.Windows.Forms.Button backButton;
+        private System.Windows.Forms.Button saveTableButton;
     }
 }
