@@ -18,6 +18,7 @@ namespace CS291_Project
         SqlConnection connection;
         SqlDataAdapter adapter;
         DataTable dataTable;
+        BindingSource bindingSource;
 
         public ChartsForm()
         {
@@ -93,7 +94,7 @@ namespace CS291_Project
         {
 
         }
-        
+
         private void button8_Click(object sender, EventArgs e)
         {
 
@@ -158,6 +159,33 @@ namespace CS291_Project
             this.Close();
         }
 
+        private void saveTableButton_Click(object sender, EventArgs e)
+        {
+            // ISSUE: Not clicking gold_star registers as NULL so it gives an error, after clicking one or more times the value is then valid even when 0.
+            using (connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                                                                    "AttachDbFilename=|DataDirectory|Database1.mdf;" +
+                                                                    "Integrated Security=True"))
+            {
+                try
+                {
+                    adapter = new SqlDataAdapter("select * from " + tablesComboBox.Text, connection);
+                    SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adapter);
+                    DataTable changesDataTable = dataTable.GetChanges();
+                    if (changesDataTable != null)
+                    {
+                        adapter.Update(changesDataTable);
+                    }
+                    MessageBox.Show("Information Updated", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                connection.Close();
+            }
+        }
+
         private void updateTable()
         {
             using (connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
@@ -170,6 +198,9 @@ namespace CS291_Project
                 dataTable = new DataTable();
                 adapter.Fill(dataTable);
                 tableDataGridView.DataSource = dataTable;
+                bindingSource = new BindingSource();
+                bindingSource.DataSource = dataTable;
+                tableDataGridView.DataSource = bindingSource;
 
                 connection.Close();
             }
