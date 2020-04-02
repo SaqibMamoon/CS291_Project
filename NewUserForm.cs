@@ -18,11 +18,6 @@ namespace CS291_Project
         {
             InitializeComponent();
 
-            // Define path and DataDirectory to access the database later
-            string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            string path = (System.IO.Path.GetDirectoryName(executable));
-            AppDomain.CurrentDomain.SetData("DataDirectory", path);
-
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.Items.Add("Customer");
             comboBox1.Items.Add("Employee");
