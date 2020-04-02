@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -13,7 +14,9 @@ namespace CS291_Project
 {
     public partial class LoginForm : Form
     {
-        string username, password;
+		string username =  "";
+        string password = "";
+
         public LoginForm()
         {
             /*
@@ -23,7 +26,12 @@ namespace CS291_Project
             this.MinimumSize = new Size(height, width);
             */
             InitializeComponent();
-            
+
+            // Define path and DataDirectory to access the database later
+            string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string path = Path.GetFullPath(Path.Combine((System.IO.Path.GetDirectoryName(executable)), @"..\..\"));
+            AppDomain.CurrentDomain.SetData("DataDirectory", path);
+
             label1.Text = "Username:";
             label1.AutoSize = false;
             label1.Height = 30;
@@ -53,34 +61,58 @@ namespace CS291_Project
                                                                     "AttachDbFilename=|DataDirectory|Database1.mdf;" +
                                                                     "Integrated Security=True"))
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand("select customer_id, employee_id, admin_id from user_info where (user_info.user_id = @user_id1 and user_info.password = @pw)", 
-                    connection);
-                command.Parameters.AddWithValue("@user_id1", username);
-                command.Parameters.AddWithValue("@pw", password);
+				connection.Open();
+
+				string errorText = "";
+                errorLabel.Text = errorText;
+
+				if (username == "")
+					errorText += "Please enter a username.\n";
+				if (password == "")
+					errorText += "Please enter a password.\n";
+				if (errorText != "")
+                {
+                    errorLabel.Text = errorText;
+					return;
+				}
+
+				SqlCommand command = new SqlCommand();
+				command.Connection = connection;
+				command.Parameters.AddWithValue("@user_id1", username);
+				command.Parameters.AddWithValue("@pw", password);
+
+				command.CommandText = "select count(*) from user_info " +
+					  "where (user_info.user_id = @user_id1)";
+				bool userExists = Convert.ToInt32(command.ExecuteScalar()) == 1;
+                if (!userExists)
+				{
+                    errorLabel.Text = "Username does not exist.";
+					return;
+				}
+
+				command.CommandText = "select count(*) from user_info " +
+	                "where (user_info.user_id = @user_id1) and (user_info.password = @pw)";
+                bool passwordCorrect = Convert.ToInt32(command.ExecuteScalar()) == 1;
+                if (!passwordCorrect)
+				{
+					errorLabel.Text = "Password is incorrect.";
+					return;
+				}
+
+				command.CommandText = "select customer_id, employee_id, admin_id from user_info where (user_info.user_id = @user_id1 and user_info.password = @pw)";
 
                 using(SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        if (reader[0].ToString().Length > 0)
-                        {
-                            Customer c = new Customer();
-                            changePage(c);
-                        }
-                        else if (reader[1].ToString().Length > 0)
-                        {
-                            
-                        }
-                        else if (reader[2].ToString().Length > 0)
-                        {
-                            ChartsForm cF = new ChartsForm();
-                            changePage(cF);
-                        }
+                        if (reader[0].ToString() != "")
+                            changePage(new Customer());
+                        else if (reader[1].ToString() != "")
+							changePage(new Customer());
+                        else if (reader[2].ToString() != "")
+                            changePage(new ChartsForm());
                         else
-                        {
                             MessageBox.Show("User does not exist in system.");
-                        }
                     }
                 }
                 
