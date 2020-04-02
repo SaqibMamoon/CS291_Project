@@ -13,7 +13,6 @@ namespace CS291_Project
 {
     public partial class NewUserForm : Form
     {
-        string accType;
         public NewUserForm()
         {
             InitializeComponent();
@@ -86,9 +85,8 @@ namespace CS291_Project
             button1.Hide();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            accType = comboBox1.SelectedItem.ToString();
             int index = comboBox1.SelectedIndex;
             label1.Show();
             label2.Show();
@@ -115,7 +113,7 @@ namespace CS291_Project
             
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             this.Hide();
             LoginForm nU = new LoginForm();
@@ -123,9 +121,9 @@ namespace CS291_Project
             this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            if (!textBoxesFilled())
+            if (!TextBoxesFilled())
             {
                 label6.Show();
             }
@@ -221,7 +219,7 @@ namespace CS291_Project
             }
         }
 
-        private bool textBoxesFilled()
+        private bool TextBoxesFilled()
         {
             TextBox[] allTextBoxes = { textBox1, textBox2, textBox3, textBox4, textBox5 };
             foreach (TextBox textBox in allTextBoxes)
