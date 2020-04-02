@@ -278,6 +278,7 @@ namespace CS291_Project
         private void updateChart()
         {
             chart1.Series.Clear();
+            chart1.Series.Add("Series1");
             List<List<string>> store = new List<List<string>>();
 
             //This is where I'm going through the dictionary for each of the selected choices to make the query
@@ -295,15 +296,13 @@ namespace CS291_Project
                         SqlCommand comm = new SqlCommand(command, conn);
                         using (SqlDataReader reader = comm.ExecuteReader())
                         {
-                            List<string> temp = new List<string> { entry.Key};
+                            List<string> temp = new List<string>();
                             while (reader.Read())
                             {
                                 foreach (var read in reader)
                                 {
-                                    temp.Add(read.ToString());
+                                    temp.Add(" AND " + read.ToString() + " = " + entry.Value.s);
                                 }
-                                label1.Text = reader[0].ToString();
-                                Thread.Sleep(5000);
                             }
                             store.Add(temp);
                         }
@@ -316,17 +315,36 @@ namespace CS291_Project
             {
                 paths *= ss.Count;
             }
-            List<recursiveTool> tools = new List<recursiveTool>();
+            List<recursiveTool> toolsInv = new List<recursiveTool>();
+            List<recursiveTool> toolsRen = new List<recursiveTool>();
             for (int i=0; i < paths; i++)
             {
                 recursiveTool tool = new recursiveTool();
-                tools.Add(tool);
+                toolsInv.Add(tool);
+                toolsRen.Add(tool);
             }
 
-            //Here I use recursion to get through each path and get the results
+            try
+            {
+                toolsInv = this.recurQuery(store.Count, store, toolsInv, "car, car_type, pricing_model WHERE car.car_id = car_type.car_id and car_type.pricing_id = pricing_model.pricing_id");
+                toolsRen = this.recurQuery(store.Count, store, toolsInv, "car, car_type, pricing_model, rental WHERE rental.car_id = car.car_id and car.car_id = car_type.car_id and car_type.pricing_id = pricing_model.pricing_id");
+            }
+            catch
+            {
+                chart1.Series["Series1"].Points.AddXY("Empty search criteria", 0);
+            }
+
+            foreach (recursiveTool tool in toolsInv)
+            {
+                chart1.Series["Series1"].Points.AddXY(tool.direction, tool.count);
+            }
+            foreach(recursiveTool tool in toolsRen)
+            {
+                chart1.Series["Series1"].Points.AddXY(tool.direction, tool.count);
+            }
         }
 
-        private List<recursiveTool> recurQuery(int n, List<List<string>> vs, List<recursiveTool> recursiveTools, int start)
+        private List<recursiveTool> recurQuery(int n, List<List<string>> vs, List<recursiveTool> recursiveTools, string fromWhere)
         {
             if (n == 0)
             {
@@ -344,22 +362,32 @@ namespace CS291_Project
                                                                     "Integrated Security=True"))
                         {
                             conn.Open();
-                            string command = "SELECT count (*) FROM " + temp;
+                            string command = "SELECT count (*) FROM" + fromWhere + temp;
+                            SqlCommand comm = new SqlCommand(command, conn);
+                            temp.count = Convert.ToInt32(comm.ExecuteScalar());
+                            conn.Close();
                         }
+                        recursiveTools[(i * recursiveTools.Count / vs[n].Count) + j] = temp;
                     }
                 }
+                return recursiveTools;
             }
+
             else
             {
                 //Goes through each item
+                int cnt = vs[n].Count;
                 for (int i = 0; i < vs[n].Count; i++)
                 {
                     //Goes through each portion of recursive tools to put the item into
                     for (int j = 0; j < recursiveTools.Count / vs[n].Count; j++)
                     {
-                        
+                        recursiveTool temp = recursiveTools[(i * recursiveTools.Count / vs[n].Count) + j];
+                        temp.direction += vs[n][i];
+                        recursiveTools[(i * recursiveTools.Count / vs[n].Count) + j] = temp;
                     }
                 }
+                return recurQuery(n - 1, vs, recursiveTools, fromWhere);
             }
         }
     }
