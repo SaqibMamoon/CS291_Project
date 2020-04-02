@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -58,7 +59,7 @@ namespace CS291_Project
             button3.BackColor = Color.Red; button3.ForeColor = Color.White; button3.Text = "Style"; button3.TabIndex = 3; buts.Add("b3", b3);
             button4.BackColor = Color.Red; button4.ForeColor = Color.White; button4.Text = "Age"; button4.TabIndex = 4; buts.Add("b4", b4);
             button5.BackColor = Color.Red; button5.ForeColor = Color.White; button5.Text = "Sun Roof"; button5.TabIndex = 5; buts.Add("b5", b5);
-            button6.BackColor = Color.Red; button6.ForeColor = Color.White; button6.Text = "Fuel type"; button6.TabIndex = 6; buts.Add("b56", b6);
+            button6.BackColor = Color.Red; button6.ForeColor = Color.White; button6.Text = "Fuel type"; button6.TabIndex = 6; buts.Add("b6", b6);
             button7.BackColor = Color.Red; button7.ForeColor = Color.White; button7.Text = "Daily Prices"; button7.TabIndex = 7; buts.Add("b7", b7);
             button8.BackColor = Color.Red; button8.ForeColor = Color.White; button8.Text = "Weekly Prices"; button8.TabIndex = 8; buts.Add("b8", b8);
             button9.BackColor = Color.Red; button9.ForeColor = Color.White; button9.Text = "Monthly Prices"; button9.TabIndex = 9; buts.Add("b9", b9);
@@ -266,8 +267,38 @@ namespace CS291_Project
         private void updateChart()
         {
             chart1.Series.Clear();
+            List<List<string>> store = new List<List<string>>();
+            //This is where I'm going through the dictionary for each of the selected choices to make the query
+            foreach (KeyValuePair<string, cSBool> entry in buts)
+            {
+                if (entry.Value.b)
+                {
+                    using (SqlConnection conn = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                                                                    "AttachDbFilename=|DataDirectory|Database1.mdf;" +
+                                                                    "Integrated Security=True"))
+                    {
+                        conn.Open();
+                        string command = "SELECT DISTINCT " + entry.Value.s + " FROM car, car_type, pricing_model " +
+                            "WHERE car.type_id = car_type.type_id AND car_type.pricing_id = pricing_model.pricing_id";
+                        SqlCommand comm = new SqlCommand(command, conn);
+                        using (SqlDataReader reader = comm.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                List<string> temp = new List<string>();
+                                foreach (var read in reader)
+                                {
+                                    temp.Add(read.ToString());
+                                }
+                                label1.Text = reader[0].ToString();
+                                Thread.Sleep(5000);
+                            }
+                        }
+                        conn.Close();
+                    }
+                }
+            }
 
-            
         }
     }
 }
