@@ -173,7 +173,7 @@ namespace CS291_Project
                             command.ExecuteNonQuery();
                         }
 
-                        else
+                        else if (comboBox1.SelectedIndex == 1)
                         {
                             try
                             {
@@ -195,10 +195,19 @@ namespace CS291_Project
                                 command.Parameters.AddWithValue("@employee_id", employee_id);
                                 command.ExecuteNonQuery();
                             }
+
+
                             catch
                             {
                                 MessageBox.Show("Branch doesn't exist.");
                             }
+                        }
+                        else if (comboBox1.SelectedIndex == 2)
+                        {
+                            command.CommandText = "insert into user_info (user_id, password, admin_id) values (@user_id2, @password, 1)";
+                            command.Parameters.AddWithValue("@user_id2", textBox1.Text);
+                            command.Parameters.AddWithValue("@password", textBox2.Text);
+                            command.ExecuteNonQuery();
                         }
 
                         connection.Close();
