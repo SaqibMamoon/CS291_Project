@@ -24,6 +24,17 @@ namespace CS291_Project
             public string s;
         }
 
+        public struct recursiveTool
+        {
+            public recursiveTool(int C=0, string D="")
+            {
+                count = C;
+                direction = D;
+            }
+            public int count;
+            public string direction;
+        }
+
         DateTime startDate, endDate;
         SqlConnection connection;
         SqlDataAdapter adapter;
@@ -268,6 +279,7 @@ namespace CS291_Project
         {
             chart1.Series.Clear();
             List<List<string>> store = new List<List<string>>();
+
             //This is where I'm going through the dictionary for each of the selected choices to make the query
             foreach (KeyValuePair<string, cSBool> entry in buts)
             {
@@ -283,9 +295,9 @@ namespace CS291_Project
                         SqlCommand comm = new SqlCommand(command, conn);
                         using (SqlDataReader reader = comm.ExecuteReader())
                         {
+                            List<string> temp = new List<string> { entry.Key};
                             while (reader.Read())
                             {
-                                List<string> temp = new List<string>();
                                 foreach (var read in reader)
                                 {
                                     temp.Add(read.ToString());
@@ -293,12 +305,62 @@ namespace CS291_Project
                                 label1.Text = reader[0].ToString();
                                 Thread.Sleep(5000);
                             }
+                            store.Add(temp);
                         }
                         conn.Close();
                     }
                 }
             }
+            int paths = 1;
+            foreach(List<string> ss in store)
+            {
+                paths *= ss.Count;
+            }
+            List<recursiveTool> tools = new List<recursiveTool>();
+            for (int i=0; i < paths; i++)
+            {
+                recursiveTool tool = new recursiveTool();
+                tools.Add(tool);
+            }
 
+            //Here I use recursion to get through each path and get the results
+        }
+
+        private List<recursiveTool> recurQuery(int n, List<List<string>> vs, List<recursiveTool> recursiveTools, int start)
+        {
+            if (n == 0)
+            {
+                //Goes through each item
+                for(int i=0; i < vs[n].Count; i++)
+                {
+                    //Goes through each portion of recursive tools to put the item into
+                    for (int j=0; j < recursiveTools.Count / vs[n].Count; j++)
+                    {
+                        recursiveTool temp = recursiveTools[(i * recursiveTools.Count / vs[n].Count) + j];
+                        temp.direction += vs[n][i];
+
+                        using (SqlConnection conn = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                                                                    "AttachDbFilename=|DataDirectory|Database1.mdf;" +
+                                                                    "Integrated Security=True"))
+                        {
+                            conn.Open();
+                            string command = "SELECT count (*) FROM " + temp;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                //Goes through each item
+                for (int i = 0; i < vs[n].Count; i++)
+                {
+                    //Goes through each portion of recursive tools to put the item into
+                    for (int j = 0; j < recursiveTools.Count / vs[n].Count; j++)
+                    {
+                        
+                    }
+                }
+            }
         }
     }
 }
