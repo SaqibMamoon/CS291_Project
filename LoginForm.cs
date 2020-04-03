@@ -106,9 +106,9 @@ namespace CS291_Project
                     while (reader.Read())
                     {
                         if (reader[0].ToString() != "")
-                            changePage(new Customer());
+                            changePage(new CustomerForm(0));
                         else if (reader[1].ToString() != "")
-							changePage(new Customer());
+							changePage(new CustomerForm(0));
                         else if (reader[2].ToString() != "")
                             changePage(new ChartsForm());
                         else
