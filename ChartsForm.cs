@@ -368,17 +368,30 @@ namespace CS291_Project
                                                                         "Integrated Security=True"))
                         {
                             conn.Open();
-                            string command = "SELECT DISTINCT " + entry.Value.s + " FROM car, car_type, pricing_model, rental " +
-                                "WHERE car.type_id = car_type.type_id AND car_type.pricing_id = pricing_model.pricing_id and car.car_id = rental.car_id";
+                            string command = "SELECT DISTINCT " + entry.Value.s + " FROM car_type, car, pricing_model";
                             SqlCommand comm = new SqlCommand(command, conn);
+
                             using (SqlDataReader reader = comm.ExecuteReader())
                             {
                                 List<string> temp = new List<string>();
-                                while (reader.Read())
+                                int cnt = 0;
+                                while (true)
                                 {
-                                    foreach (var read in reader)
+                                    try
                                     {
-                                        temp.Add(" AND " + read.ToString() + " = " + entry.Value.s);
+                                        if (reader.Read())
+                                        {
+                                            temp.Add(" and " + entry.Value.s + " IN ('" + reader[cnt].ToString().Replace(" ", "") + "')");
+                                            System.Diagnostics.Debug.WriteLine(" and " + entry.Value.s + " IN ('" + reader[cnt].ToString().Replace(" ", "") + "')", "Work");
+                                        }
+                                        else
+                                        {
+                                            break;
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        break;
                                     }
                                 }
                                 store.Add(temp);
@@ -388,21 +401,25 @@ namespace CS291_Project
                     }
                 }
             }
+            
             int paths = 1;
             foreach(List<string> ss in store)
             {
                 paths *= ss.Count;
             }
+            chart1.ChartAreas[0].AxisX.Minimum = 0;
+            chart1.ChartAreas[0].AxisX.Maximum = paths + 1;
+            chart1.ChartAreas[0].AxisY.Minimum = 0;
+            chart1.ChartAreas[0].AxisY.Maximum= 5;
             List<recursiveTool> toolsRen = new List<recursiveTool>();
             for (int i=0; i < paths; i++)
             {
                 recursiveTool tool = new recursiveTool();
                 toolsRen.Add(tool);
             }
-
             try
             {
-                toolsRen = this.recurQuery(store.Count, store, toolsRen, "car, car_type, pricing_model, rental WHERE rental.car_id = car.car_id and car.car_id = car_type.car_id and car_type.pricing_id = pricing_model.pricing_id");
+                toolsRen = this.recurQuery(store.Count, store, toolsRen, "car, car_type, pricing_model, rental WHERE rental.car_id = car.car_id and car.type_id = car_type.type_id and car_type.pricing_id = pricing_model.pricing_id");
                 foreach (recursiveTool tool in toolsRen)
                 {
                     chart1.Series["Series1"].Points.AddXY(tool.direction, tool.count);
@@ -410,9 +427,22 @@ namespace CS291_Project
             }
             catch
             {
-                chart1.Series["Series1"].Points.AddXY("Empty search criteria", 0);
+                using (SqlConnection conn = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                                                                    "AttachDbFilename=|DataDirectory|Database1.mdf;" +
+                                                                    "Integrated Security=True"))
+                {
+                    chart1.ChartAreas[0].AxisX.Maximum = 3;
+                    conn.Open();
+                    SqlCommand comm = new SqlCommand("SELECT count (*) from car_type", conn);
+                    int carInv = Convert.ToInt32(comm.ExecuteScalar());
+                    comm = new SqlCommand("SELECT count (*) from rental", conn);
+                    int carRent = Convert.ToInt32(comm.ExecuteScalar());
+                    chart1.Series["Series1"].Points.AddXY("Total Cars in Inventory", carInv.ToString()); //This is how you add both X and Y values simultaneously
+                    chart1.Series["Series1"].Points.AddXY("Total Cars rented", carRent.ToString());
+                    chart1.AlignDataPointsByAxisLabel();
+                    conn.Close();
+                }
             }
-            
         }
 
         private void updateChartCust()
@@ -458,29 +488,34 @@ namespace CS291_Project
 
         private List<recursiveTool> recurQuery(int n, List<List<string>> vs, List<recursiveTool> recursiveTools, string fromWhere)
         {
-            if (n == 0)
+
+            System.Diagnostics.Debug.WriteLine(n, "prom");
+            if (n == 1)
             {
                 //Goes through each item
-                for(int i=0; i < vs[n].Count; i++)
+                for(int i=0; i < vs[n-1].Count; i++)
                 {
                     //Goes through each portion of recursive tools to put the item into
-                    for (int j=0; j < recursiveTools.Count / vs[n].Count; j++)
+                    for (int j=0; j < recursiveTools.Count / vs[n-1].Count; j++)
                     {
-                        recursiveTool temp = recursiveTools[(i * recursiveTools.Count / vs[n].Count) + j];
-                        temp.direction += vs[n][i];
+                        recursiveTool temp = recursiveTools[(i * recursiveTools.Count / vs[n-1].Count) + j];
+                        temp.direction += vs[n-1][i];
 
                         using (SqlConnection conn = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
                                                                     "AttachDbFilename=|DataDirectory|Database1.mdf;" +
                                                                     "Integrated Security=True"))
                         {
                             conn.Open();
-                            string start_and_end_check = "AND ((" + startDate + " >= start_date AND " + startDate + " <= end_date) OR (" + endDate + " >= start_date AND " + endDate + " <= end_date))";
-                            string command = "SELECT count (*) FROM" + fromWhere + temp + start_and_end_check;
+                            string start_and_end_check = "AND ((" + startDate.ToString("yyyy'-'MM'-'dd") + " >= start_date AND " + startDate.ToString("yyyy'-'MM'-'dd") + " <= end_date) OR (" + endDate.ToString("yyyy'-'MM'-'dd") + " >= start_date AND " + endDate.ToString("yyyy'-'MM'-'dd") + " <= end_date))";
+                            string command = "SELECT count (*) FROM " + fromWhere + temp.direction;// + start_and_end_check;
+                            System.Diagnostics.Debug.WriteLine(command, "That bitch");
+                            System.Diagnostics.Debug.WriteLine(temp, "Temporary");
                             SqlCommand comm = new SqlCommand(command, conn);
-                            temp.count = Convert.ToInt32(comm.ExecuteScalar());
+                            int lemming = (Int32)comm.ExecuteScalar();
+                            temp.count = lemming;
                             conn.Close();
                         }
-                        recursiveTools[(i * recursiveTools.Count / vs[n].Count) + j] = temp;
+                        recursiveTools[(i * recursiveTools.Count / vs[n-1].Count) + j] = temp;
                     }
                 }
                 return recursiveTools;
@@ -489,15 +524,14 @@ namespace CS291_Project
             else
             {
                 //Goes through each item
-                int cnt = vs[n].Count;
-                for (int i = 0; i < vs[n].Count; i++)
+                for (int i = 0; i < vs[n-1].Count; i++)
                 {
                     //Goes through each portion of recursive tools to put the item into
-                    for (int j = 0; j < recursiveTools.Count / vs[n].Count; j++)
+                    for (int j = 0; j < recursiveTools.Count / vs[n-1].Count; j++)
                     {
-                        recursiveTool temp = recursiveTools[(i * recursiveTools.Count / vs[n].Count) + j];
-                        temp.direction += vs[n][i];
-                        recursiveTools[(i * recursiveTools.Count / vs[n].Count) + j] = temp;
+                        recursiveTool temp = recursiveTools[(i * recursiveTools.Count / vs[n-1].Count) + j];
+                        temp.direction += vs[n-1][i];
+                        recursiveTools[(i * recursiveTools.Count / vs[n-1].Count) + j] = temp;
                     }
                 }
                 return recurQuery(n - 1, vs, recursiveTools, fromWhere);
