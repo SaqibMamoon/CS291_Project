@@ -32,21 +32,6 @@ namespace CS291_Project
             string path = Path.GetFullPath(Path.Combine((System.IO.Path.GetDirectoryName(executable)), @"..\..\"));
             AppDomain.CurrentDomain.SetData("DataDirectory", path);
 
-            label1.Text = "Username:";
-            label1.AutoSize = false;
-            label1.Height = 30;
-            label1.Width = 85;
-            label1.Font = new Font("Times New Roman", 12, FontStyle.Bold);
-
-            label2.Text = "Password:";
-            label2.AutoSize = false;
-            label2.Height = 30;
-            label2.Width = 85;
-            label2.Font = new Font("Times New Roman", 12, FontStyle.Bold);
-
-            button1.Text = "Login";
-            button2.Text = "New User";
-
             textBox2.TabIndex = 0;
             textBox1.TabIndex = 1;
             button1.TabIndex = 2;
