@@ -203,11 +203,11 @@ namespace CS291_Project
                 carTextInfo.AppendText(Environment.NewLine);
                 carTextInfo.AppendText($"Colors: {colors}");
                 carTextInfo.AppendText(Environment.NewLine);
-                carTextInfo.AppendText($"Sun roof? {sun_roof}");
+                carTextInfo.AppendText($"Sun roof: {sun_roof}");
                 carTextInfo.AppendText(Environment.NewLine);
                 carTextInfo.AppendText($"Manual: {manual}");
                 carTextInfo.AppendText(Environment.NewLine);
-                carTextInfo.AppendText($"Fuel Type: {fuelType}");
+                carTextInfo.AppendText("Fuel Type: " + (fuelType ? "Regular" : "Premium"));
                 carTextInfo.AppendText(Environment.NewLine);
                 carTextInfo.AppendText($"Daily rental price: {daily_price}");
                 carTextInfo.AppendText(Environment.NewLine);
