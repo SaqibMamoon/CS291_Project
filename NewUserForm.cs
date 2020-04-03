@@ -22,43 +22,7 @@ namespace CS291_Project
             comboBox1.Items.Add("Employee");
             comboBox1.Items.Add("Administrator");
 
-            label1.Text = "Username:";
-            label1.AutoSize = false;
-            label1.Height = 30;
-            label1.Width = 90;
-            label1.Font = new Font("Times New Roman", 12, FontStyle.Bold);
-
-            label2.Text = "Password:";
-            label2.AutoSize = false;
-            label2.Height = 30;
-            label2.Width = 90;
-            label2.Font = new Font("Times New Roman", 12, FontStyle.Bold);
-
-            label3.Text = "First Name:";
-            label3.AutoSize = false;
-            label3.Height = 30;
-            label3.Width = 90;
-            label3.Font = new Font("Times New Roman", 12, FontStyle.Bold);
-
-            label4.Text = "Last Name:";
-            label4.AutoSize = false;
-            label4.Height = 30;
-            label4.Width = 90;
-            label4.Font = new Font("Times New Roman", 12, FontStyle.Bold);
-
-            label5.Text = "Branch ID:";
-            label5.AutoSize = false;
-            label5.Height = 30;
-            label5.Width = 90;
-            label5.Font = new Font("Times New Roman", 12, FontStyle.Bold);
-
-            label6.Text = "Fill in every form!";
-            label6.AutoSize = false;
-            label6.Height = 60;
-            label6.Width = 90;
-            label6.Font = new Font("Times New Roman", 12, FontStyle.Bold);
-
-            button1.Text = "Create User"; button2.Text = "Cancel";
+            createUserButton.Text = "Create User"; cancelButton.Text = "Cancel";
 
             comboBox1.TabIndex = 0; 
             textBox1.TabIndex = 1;
@@ -66,15 +30,14 @@ namespace CS291_Project
             textBox3.TabIndex = 3;
             textBox4.TabIndex = 4;
             textBox5.TabIndex = 5;
-            button1.TabIndex = 6;
-            button2.TabIndex = 7;
+            createUserButton.TabIndex = 6;
+            cancelButton.TabIndex = 7;
 
-            label1.Hide();
-            label2.Hide();
+            usernameLabel.Hide();
+            passwordLabel.Hide();
             label3.Hide();
             label4.Hide();
             label5.Hide();
-            label6.Hide();
 
             textBox1.Hide();
             textBox2.Hide();
@@ -82,14 +45,14 @@ namespace CS291_Project
             textBox4.Hide();
             textBox5.Hide();
             
-            button1.Hide();
+            createUserButton.Hide();
         }
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = comboBox1.SelectedIndex;
-            label1.Show();
-            label2.Show();
+            usernameLabel.Show();
+            passwordLabel.Show();
             label3.Show();
             label4.Show();
             
@@ -98,7 +61,7 @@ namespace CS291_Project
             textBox3.Show();
             textBox4.Show();
 
-            button1.Show();
+            createUserButton.Show();
 
             if (index != 0)
             {
@@ -125,7 +88,7 @@ namespace CS291_Project
         {
             if (!TextBoxesFilled())
             {
-                label6.Show();
+                errorLabel.Text = "Fill in every form!";
             }
             else
             {
@@ -143,8 +106,13 @@ namespace CS291_Project
                     int userCount = Convert.ToInt32(command.ExecuteScalar());
 
                     // If < 0 then user_id does not exist
-                    if (userCount == 0)
+                    if (userCount != 0)
                     {
+                        errorLabel.Text = "Username already exists.";
+                    }
+                    else
+                    {
+                        errorLabel.Text = "";
                         if (comboBox1.SelectedIndex == 0)
                         {
                             // Insert customer information
@@ -209,11 +177,6 @@ namespace CS291_Project
                         LoginForm nU = new LoginForm();
                         nU.ShowDialog();
                         this.Close();
-                    }
-                    else
-                    {
-                        // SHOW LABEL BECAUSE USER EXISTS
-                        MessageBox.Show("exists");
                     }
                 }
             }
