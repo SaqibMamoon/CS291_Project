@@ -48,14 +48,14 @@
             this.customerComboBox.Location = new System.Drawing.Point(50, 60);
             this.customerComboBox.Name = "customerComboBox";
             this.customerComboBox.Size = new System.Drawing.Size(183, 21);
-            this.customerComboBox.TabIndex = 0;
+            this.customerComboBox.TabIndex = 1;
             // 
             // bookButton
             // 
             this.bookButton.Location = new System.Drawing.Point(254, 58);
             this.bookButton.Name = "bookButton";
             this.bookButton.Size = new System.Drawing.Size(75, 23);
-            this.bookButton.TabIndex = 1;
+            this.bookButton.TabIndex = 2;
             this.bookButton.Text = "Book";
             this.bookButton.UseVisualStyleBackColor = true;
             this.bookButton.Click += new System.EventHandler(this.bookButton_Click);
@@ -66,7 +66,7 @@
             this.bookingLabel.Location = new System.Drawing.Point(47, 44);
             this.bookingLabel.Name = "bookingLabel";
             this.bookingLabel.Size = new System.Drawing.Size(86, 13);
-            this.bookingLabel.TabIndex = 2;
+            this.bookingLabel.TabIndex = 0;
             this.bookingLabel.Text = "Select customer:";
             // 
             // backButton
@@ -74,7 +74,7 @@
             this.backButton.Location = new System.Drawing.Point(280, 153);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(75, 23);
-            this.backButton.TabIndex = 3;
+            this.backButton.TabIndex = 5;
             this.backButton.Text = "Back";
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
@@ -105,7 +105,7 @@
             this.bookCustomerErrorLabel.Location = new System.Drawing.Point(56, 93);
             this.bookCustomerErrorLabel.Name = "bookCustomerErrorLabel";
             this.bookCustomerErrorLabel.Size = new System.Drawing.Size(143, 13);
-            this.bookCustomerErrorLabel.TabIndex = 5;
+            this.bookCustomerErrorLabel.TabIndex = 3;
             this.bookCustomerErrorLabel.Text = "A customer must be selected";
             this.bookCustomerErrorLabel.Visible = false;
             // 

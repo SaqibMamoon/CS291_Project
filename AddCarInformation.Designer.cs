@@ -50,6 +50,7 @@
             this.branchComboBox = new System.Windows.Forms.ComboBox();
             this.branchLabel = new System.Windows.Forms.Label();
             this.carTypeTabPage = new System.Windows.Forms.TabPage();
+            this.fuelTypeCheckBox = new System.Windows.Forms.CheckBox();
             this.pricingModelFormatLabel = new System.Windows.Forms.Label();
             this.carTypeErrorLabel = new System.Windows.Forms.Label();
             this.seatsNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -73,7 +74,6 @@
             this.carManufacturerLabel = new System.Windows.Forms.Label();
             this.manufacturerTextBox = new System.Windows.Forms.TextBox();
             this.addCarTypeButton = new System.Windows.Forms.Button();
-            this.fuelTypeCheckBox = new System.Windows.Forms.CheckBox();
             pricingModelTabPage = new System.Windows.Forms.TabPage();
             pricingModelTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.monthlyNumericUpDown)).BeginInit();
@@ -113,7 +113,7 @@
             this.pricingModelErrorLabel.Location = new System.Drawing.Point(161, 179);
             this.pricingModelErrorLabel.Name = "pricingModelErrorLabel";
             this.pricingModelErrorLabel.Size = new System.Drawing.Size(101, 13);
-            this.pricingModelErrorLabel.TabIndex = 64;
+            this.pricingModelErrorLabel.TabIndex = 8;
             this.pricingModelErrorLabel.Text = "Enter a model name";
             this.pricingModelErrorLabel.Visible = false;
             // 
@@ -122,7 +122,7 @@
             this.addPricingModelButton.Location = new System.Drawing.Point(173, 204);
             this.addPricingModelButton.Name = "addPricingModelButton";
             this.addPricingModelButton.Size = new System.Drawing.Size(75, 23);
-            this.addPricingModelButton.TabIndex = 63;
+            this.addPricingModelButton.TabIndex = 9;
             this.addPricingModelButton.Text = "Add";
             this.addPricingModelButton.UseVisualStyleBackColor = true;
             this.addPricingModelButton.Click += new System.EventHandler(this.addPricingModelButton_Click);
@@ -132,7 +132,7 @@
             this.pricingModelNameTextBox.Location = new System.Drawing.Point(173, 55);
             this.pricingModelNameTextBox.Name = "pricingModelNameTextBox";
             this.pricingModelNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.pricingModelNameTextBox.TabIndex = 62;
+            this.pricingModelNameTextBox.TabIndex = 1;
             // 
             // modelNameLabel
             // 
@@ -140,7 +140,7 @@
             this.modelNameLabel.Location = new System.Drawing.Point(94, 58);
             this.modelNameLabel.Name = "modelNameLabel";
             this.modelNameLabel.Size = new System.Drawing.Size(70, 13);
-            this.modelNameLabel.TabIndex = 61;
+            this.modelNameLabel.TabIndex = 0;
             this.modelNameLabel.Text = "Model Name:";
             // 
             // monthlyNumericUpDown
@@ -148,7 +148,7 @@
             this.monthlyNumericUpDown.Location = new System.Drawing.Point(173, 133);
             this.monthlyNumericUpDown.Name = "monthlyNumericUpDown";
             this.monthlyNumericUpDown.Size = new System.Drawing.Size(100, 20);
-            this.monthlyNumericUpDown.TabIndex = 60;
+            this.monthlyNumericUpDown.TabIndex = 7;
             // 
             // monthlyPriceLabel
             // 
@@ -156,7 +156,7 @@
             this.monthlyPriceLabel.Location = new System.Drawing.Point(94, 135);
             this.monthlyPriceLabel.Name = "monthlyPriceLabel";
             this.monthlyPriceLabel.Size = new System.Drawing.Size(74, 13);
-            this.monthlyPriceLabel.TabIndex = 59;
+            this.monthlyPriceLabel.TabIndex = 6;
             this.monthlyPriceLabel.Text = "Monthly Price:";
             // 
             // weeklyNumericUpDown
@@ -164,7 +164,7 @@
             this.weeklyNumericUpDown.Location = new System.Drawing.Point(173, 107);
             this.weeklyNumericUpDown.Name = "weeklyNumericUpDown";
             this.weeklyNumericUpDown.Size = new System.Drawing.Size(100, 20);
-            this.weeklyNumericUpDown.TabIndex = 58;
+            this.weeklyNumericUpDown.TabIndex = 5;
             // 
             // weeklyPriceLabel
             // 
@@ -172,7 +172,7 @@
             this.weeklyPriceLabel.Location = new System.Drawing.Point(94, 109);
             this.weeklyPriceLabel.Name = "weeklyPriceLabel";
             this.weeklyPriceLabel.Size = new System.Drawing.Size(73, 13);
-            this.weeklyPriceLabel.TabIndex = 57;
+            this.weeklyPriceLabel.TabIndex = 4;
             this.weeklyPriceLabel.Text = "Weekly Price:";
             // 
             // dailyNumericUpDown
@@ -180,7 +180,7 @@
             this.dailyNumericUpDown.Location = new System.Drawing.Point(173, 81);
             this.dailyNumericUpDown.Name = "dailyNumericUpDown";
             this.dailyNumericUpDown.Size = new System.Drawing.Size(100, 20);
-            this.dailyNumericUpDown.TabIndex = 56;
+            this.dailyNumericUpDown.TabIndex = 3;
             // 
             // dailyPriceLabel
             // 
@@ -188,7 +188,7 @@
             this.dailyPriceLabel.Location = new System.Drawing.Point(94, 83);
             this.dailyPriceLabel.Name = "dailyPriceLabel";
             this.dailyPriceLabel.Size = new System.Drawing.Size(60, 13);
-            this.dailyPriceLabel.TabIndex = 55;
+            this.dailyPriceLabel.TabIndex = 2;
             this.dailyPriceLabel.Text = "Daily Price:";
             // 
             // tabControl
@@ -227,7 +227,7 @@
             this.carErrorLabel.Location = new System.Drawing.Point(117, 245);
             this.carErrorLabel.Name = "carErrorLabel";
             this.carErrorLabel.Size = new System.Drawing.Size(0, 13);
-            this.carErrorLabel.TabIndex = 40;
+            this.carErrorLabel.TabIndex = 0;
             // 
             // carIDLabel
             // 
@@ -235,7 +235,7 @@
             this.carIDLabel.Location = new System.Drawing.Point(114, 73);
             this.carIDLabel.Name = "carIDLabel";
             this.carIDLabel.Size = new System.Drawing.Size(40, 13);
-            this.carIDLabel.TabIndex = 39;
+            this.carIDLabel.TabIndex = 1;
             this.carIDLabel.Text = "Car ID:";
             // 
             // carIDTextBox
@@ -243,14 +243,14 @@
             this.carIDTextBox.Location = new System.Drawing.Point(165, 70);
             this.carIDTextBox.Name = "carIDTextBox";
             this.carIDTextBox.Size = new System.Drawing.Size(121, 20);
-            this.carIDTextBox.TabIndex = 38;
+            this.carIDTextBox.TabIndex = 2;
             // 
             // addCarButton
             // 
             this.addCarButton.Location = new System.Drawing.Point(165, 180);
             this.addCarButton.Name = "addCarButton";
             this.addCarButton.Size = new System.Drawing.Size(75, 23);
-            this.addCarButton.TabIndex = 37;
+            this.addCarButton.TabIndex = 7;
             this.addCarButton.Text = "Add";
             this.addCarButton.UseVisualStyleBackColor = true;
             this.addCarButton.Click += new System.EventHandler(this.addCarButton_Click);
@@ -261,7 +261,7 @@
             this.carTypeComboBox.Location = new System.Drawing.Point(165, 126);
             this.carTypeComboBox.Name = "carTypeComboBox";
             this.carTypeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.carTypeComboBox.TabIndex = 36;
+            this.carTypeComboBox.TabIndex = 6;
             // 
             // carTypeLabel
             // 
@@ -269,7 +269,7 @@
             this.carTypeLabel.Location = new System.Drawing.Point(114, 129);
             this.carTypeLabel.Name = "carTypeLabel";
             this.carTypeLabel.Size = new System.Drawing.Size(49, 13);
-            this.carTypeLabel.TabIndex = 35;
+            this.carTypeLabel.TabIndex = 5;
             this.carTypeLabel.Text = "Car type:";
             // 
             // branchComboBox
@@ -278,7 +278,7 @@
             this.branchComboBox.Location = new System.Drawing.Point(165, 99);
             this.branchComboBox.Name = "branchComboBox";
             this.branchComboBox.Size = new System.Drawing.Size(121, 21);
-            this.branchComboBox.TabIndex = 34;
+            this.branchComboBox.TabIndex = 4;
             // 
             // branchLabel
             // 
@@ -286,7 +286,7 @@
             this.branchLabel.Location = new System.Drawing.Point(114, 102);
             this.branchLabel.Name = "branchLabel";
             this.branchLabel.Size = new System.Drawing.Size(44, 13);
-            this.branchLabel.TabIndex = 33;
+            this.branchLabel.TabIndex = 3;
             this.branchLabel.Text = "Branch:";
             // 
             // carTypeTabPage
@@ -323,13 +323,23 @@
             this.carTypeTabPage.Text = "Car Type";
             this.carTypeTabPage.UseVisualStyleBackColor = true;
             // 
+            // fuelTypeCheckBox
+            // 
+            this.fuelTypeCheckBox.AutoSize = true;
+            this.fuelTypeCheckBox.Location = new System.Drawing.Point(266, 127);
+            this.fuelTypeCheckBox.Name = "fuelTypeCheckBox";
+            this.fuelTypeCheckBox.Size = new System.Drawing.Size(73, 17);
+            this.fuelTypeCheckBox.TabIndex = 21;
+            this.fuelTypeCheckBox.Text = "Fuel Type";
+            this.fuelTypeCheckBox.UseVisualStyleBackColor = true;
+            // 
             // pricingModelFormatLabel
             // 
             this.pricingModelFormatLabel.AutoSize = true;
-            this.pricingModelFormatLabel.Location = new System.Drawing.Point(123, 225);
+            this.pricingModelFormatLabel.Location = new System.Drawing.Point(117, 225);
             this.pricingModelFormatLabel.Name = "pricingModelFormatLabel";
             this.pricingModelFormatLabel.Size = new System.Drawing.Size(248, 13);
-            this.pricingModelFormatLabel.TabIndex = 56;
+            this.pricingModelFormatLabel.TabIndex = 23;
             this.pricingModelFormatLabel.Text = "Pricing ID, Daily Price, Weekly Price, Monthly Price";
             // 
             // carTypeErrorLabel
@@ -338,196 +348,186 @@
             this.carTypeErrorLabel.Location = new System.Drawing.Point(25, 249);
             this.carTypeErrorLabel.Name = "carTypeErrorLabel";
             this.carTypeErrorLabel.Size = new System.Drawing.Size(0, 13);
-            this.carTypeErrorLabel.TabIndex = 55;
+            this.carTypeErrorLabel.TabIndex = 0;
             // 
             // seatsNumericUpDown
             // 
-            this.seatsNumericUpDown.Location = new System.Drawing.Point(126, 72);
+            this.seatsNumericUpDown.Location = new System.Drawing.Point(120, 72);
             this.seatsNumericUpDown.Name = "seatsNumericUpDown";
             this.seatsNumericUpDown.Size = new System.Drawing.Size(100, 20);
-            this.seatsNumericUpDown.TabIndex = 54;
+            this.seatsNumericUpDown.TabIndex = 5;
             // 
             // ageNumericUpDown
             // 
-            this.ageNumericUpDown.Location = new System.Drawing.Point(126, 149);
+            this.ageNumericUpDown.Location = new System.Drawing.Point(120, 149);
             this.ageNumericUpDown.Name = "ageNumericUpDown";
             this.ageNumericUpDown.Size = new System.Drawing.Size(100, 20);
-            this.ageNumericUpDown.TabIndex = 53;
+            this.ageNumericUpDown.TabIndex = 11;
             // 
             // doorsNumericUpDown
             // 
-            this.doorsNumericUpDown.Location = new System.Drawing.Point(126, 98);
+            this.doorsNumericUpDown.Location = new System.Drawing.Point(120, 98);
             this.doorsNumericUpDown.Name = "doorsNumericUpDown";
             this.doorsNumericUpDown.Size = new System.Drawing.Size(100, 20);
-            this.doorsNumericUpDown.TabIndex = 52;
+            this.doorsNumericUpDown.TabIndex = 7;
             // 
             // pricingModelLabel
             // 
             this.pricingModelLabel.AutoSize = true;
-            this.pricingModelLabel.Location = new System.Drawing.Point(46, 204);
+            this.pricingModelLabel.Location = new System.Drawing.Point(40, 204);
             this.pricingModelLabel.Name = "pricingModelLabel";
             this.pricingModelLabel.Size = new System.Drawing.Size(74, 13);
-            this.pricingModelLabel.TabIndex = 51;
+            this.pricingModelLabel.TabIndex = 16;
             this.pricingModelLabel.Text = "Pricing Model:";
             // 
             // pricingModelComboBox
             // 
             this.pricingModelComboBox.FormattingEnabled = true;
-            this.pricingModelComboBox.Location = new System.Drawing.Point(126, 201);
+            this.pricingModelComboBox.Location = new System.Drawing.Point(120, 201);
             this.pricingModelComboBox.Name = "pricingModelComboBox";
             this.pricingModelComboBox.Size = new System.Drawing.Size(262, 21);
-            this.pricingModelComboBox.TabIndex = 50;
+            this.pricingModelComboBox.TabIndex = 22;
             // 
             // manualCheckBox
             // 
             this.manualCheckBox.AutoSize = true;
-            this.manualCheckBox.Location = new System.Drawing.Point(272, 104);
+            this.manualCheckBox.Location = new System.Drawing.Point(266, 104);
             this.manualCheckBox.Name = "manualCheckBox";
             this.manualCheckBox.Size = new System.Drawing.Size(61, 17);
-            this.manualCheckBox.TabIndex = 49;
+            this.manualCheckBox.TabIndex = 20;
             this.manualCheckBox.Text = "Manual";
             this.manualCheckBox.UseVisualStyleBackColor = true;
             // 
             // bluetoothCheckBox
             // 
             this.bluetoothCheckBox.AutoSize = true;
-            this.bluetoothCheckBox.Location = new System.Drawing.Point(272, 81);
+            this.bluetoothCheckBox.Location = new System.Drawing.Point(266, 81);
             this.bluetoothCheckBox.Name = "bluetoothCheckBox";
             this.bluetoothCheckBox.Size = new System.Drawing.Size(71, 17);
-            this.bluetoothCheckBox.TabIndex = 48;
+            this.bluetoothCheckBox.TabIndex = 19;
             this.bluetoothCheckBox.Text = "Bluetooth";
             this.bluetoothCheckBox.UseVisualStyleBackColor = true;
             // 
             // sunRoofCheckBox
             // 
             this.sunRoofCheckBox.AutoSize = true;
-            this.sunRoofCheckBox.Location = new System.Drawing.Point(272, 58);
+            this.sunRoofCheckBox.Location = new System.Drawing.Point(266, 58);
             this.sunRoofCheckBox.Name = "sunRoofCheckBox";
             this.sunRoofCheckBox.Size = new System.Drawing.Size(71, 17);
-            this.sunRoofCheckBox.TabIndex = 47;
+            this.sunRoofCheckBox.TabIndex = 18;
             this.sunRoofCheckBox.Text = "Sun Roof";
             this.sunRoofCheckBox.UseVisualStyleBackColor = true;
             // 
             // conditionTextBox
             // 
-            this.conditionTextBox.Location = new System.Drawing.Point(126, 175);
+            this.conditionTextBox.Location = new System.Drawing.Point(120, 175);
             this.conditionTextBox.Name = "conditionTextBox";
             this.conditionTextBox.Size = new System.Drawing.Size(100, 20);
-            this.conditionTextBox.TabIndex = 44;
+            this.conditionTextBox.TabIndex = 13;
             // 
             // conditionLabel
             // 
             this.conditionLabel.AutoSize = true;
-            this.conditionLabel.Location = new System.Drawing.Point(47, 178);
+            this.conditionLabel.Location = new System.Drawing.Point(41, 178);
             this.conditionLabel.Name = "conditionLabel";
             this.conditionLabel.Size = new System.Drawing.Size(54, 13);
-            this.conditionLabel.TabIndex = 43;
+            this.conditionLabel.TabIndex = 12;
             this.conditionLabel.Text = "Condition:";
             // 
             // ageLabel
             // 
             this.ageLabel.AutoSize = true;
-            this.ageLabel.Location = new System.Drawing.Point(47, 152);
+            this.ageLabel.Location = new System.Drawing.Point(41, 152);
             this.ageLabel.Name = "ageLabel";
             this.ageLabel.Size = new System.Drawing.Size(29, 13);
-            this.ageLabel.TabIndex = 41;
+            this.ageLabel.TabIndex = 10;
             this.ageLabel.Text = "Age:";
             // 
             // heatedSeatsCheckBox
             // 
             this.heatedSeatsCheckBox.AutoSize = true;
-            this.heatedSeatsCheckBox.Location = new System.Drawing.Point(272, 35);
+            this.heatedSeatsCheckBox.Location = new System.Drawing.Point(266, 35);
             this.heatedSeatsCheckBox.Name = "heatedSeatsCheckBox";
             this.heatedSeatsCheckBox.Size = new System.Drawing.Size(91, 17);
-            this.heatedSeatsCheckBox.TabIndex = 40;
+            this.heatedSeatsCheckBox.TabIndex = 17;
             this.heatedSeatsCheckBox.Text = "Heated Seats";
             this.heatedSeatsCheckBox.UseVisualStyleBackColor = true;
             // 
             // colorsTextBox
             // 
-            this.colorsTextBox.Location = new System.Drawing.Point(126, 123);
+            this.colorsTextBox.Location = new System.Drawing.Point(120, 123);
             this.colorsTextBox.Name = "colorsTextBox";
             this.colorsTextBox.Size = new System.Drawing.Size(100, 20);
-            this.colorsTextBox.TabIndex = 39;
+            this.colorsTextBox.TabIndex = 9;
             // 
             // Colors
             // 
             this.Colors.AutoSize = true;
-            this.Colors.Location = new System.Drawing.Point(47, 126);
+            this.Colors.Location = new System.Drawing.Point(41, 126);
             this.Colors.Name = "Colors";
             this.Colors.Size = new System.Drawing.Size(39, 13);
-            this.Colors.TabIndex = 38;
+            this.Colors.TabIndex = 8;
             this.Colors.Text = "Colors:";
             // 
             // doorsLabel
             // 
             this.doorsLabel.AutoSize = true;
-            this.doorsLabel.Location = new System.Drawing.Point(47, 100);
+            this.doorsLabel.Location = new System.Drawing.Point(41, 100);
             this.doorsLabel.Name = "doorsLabel";
             this.doorsLabel.Size = new System.Drawing.Size(38, 13);
-            this.doorsLabel.TabIndex = 36;
+            this.doorsLabel.TabIndex = 6;
             this.doorsLabel.Text = "Doors:";
             // 
             // seatsLabel
             // 
             this.seatsLabel.AutoSize = true;
-            this.seatsLabel.Location = new System.Drawing.Point(47, 74);
+            this.seatsLabel.Location = new System.Drawing.Point(41, 74);
             this.seatsLabel.Name = "seatsLabel";
             this.seatsLabel.Size = new System.Drawing.Size(37, 13);
-            this.seatsLabel.TabIndex = 34;
+            this.seatsLabel.TabIndex = 4;
             this.seatsLabel.Text = "Seats:";
             // 
             // modelLabel
             // 
             this.modelLabel.AutoSize = true;
-            this.modelLabel.Location = new System.Drawing.Point(47, 48);
+            this.modelLabel.Location = new System.Drawing.Point(41, 48);
             this.modelLabel.Name = "modelLabel";
             this.modelLabel.Size = new System.Drawing.Size(39, 13);
-            this.modelLabel.TabIndex = 33;
+            this.modelLabel.TabIndex = 2;
             this.modelLabel.Text = "Model:";
             // 
             // modelTextBox
             // 
-            this.modelTextBox.Location = new System.Drawing.Point(126, 45);
+            this.modelTextBox.Location = new System.Drawing.Point(120, 45);
             this.modelTextBox.Name = "modelTextBox";
             this.modelTextBox.Size = new System.Drawing.Size(100, 20);
-            this.modelTextBox.TabIndex = 32;
+            this.modelTextBox.TabIndex = 3;
             // 
             // carManufacturerLabel
             // 
             this.carManufacturerLabel.AutoSize = true;
-            this.carManufacturerLabel.Location = new System.Drawing.Point(47, 22);
+            this.carManufacturerLabel.Location = new System.Drawing.Point(41, 22);
             this.carManufacturerLabel.Name = "carManufacturerLabel";
             this.carManufacturerLabel.Size = new System.Drawing.Size(73, 13);
-            this.carManufacturerLabel.TabIndex = 31;
+            this.carManufacturerLabel.TabIndex = 0;
             this.carManufacturerLabel.Text = "Manufacturer:";
             // 
             // manufacturerTextBox
             // 
-            this.manufacturerTextBox.Location = new System.Drawing.Point(126, 19);
+            this.manufacturerTextBox.Location = new System.Drawing.Point(120, 19);
             this.manufacturerTextBox.Name = "manufacturerTextBox";
             this.manufacturerTextBox.Size = new System.Drawing.Size(100, 20);
-            this.manufacturerTextBox.TabIndex = 30;
+            this.manufacturerTextBox.TabIndex = 1;
             // 
             // addCarTypeButton
             // 
-            this.addCarTypeButton.Location = new System.Drawing.Point(175, 280);
+            this.addCarTypeButton.Location = new System.Drawing.Point(169, 280);
             this.addCarTypeButton.Name = "addCarTypeButton";
             this.addCarTypeButton.Size = new System.Drawing.Size(75, 23);
-            this.addCarTypeButton.TabIndex = 29;
+            this.addCarTypeButton.TabIndex = 1;
             this.addCarTypeButton.Text = "Add";
             this.addCarTypeButton.UseVisualStyleBackColor = true;
             this.addCarTypeButton.Click += new System.EventHandler(this.addCarTypeButton_Click);
-            // 
-            // fuelTypeCheckBox
-            // 
-            this.fuelTypeCheckBox.AutoSize = true;
-            this.fuelTypeCheckBox.Location = new System.Drawing.Point(272, 127);
-            this.fuelTypeCheckBox.Name = "fuelTypeCheckBox";
-            this.fuelTypeCheckBox.Size = new System.Drawing.Size(73, 17);
-            this.fuelTypeCheckBox.TabIndex = 57;
-            this.fuelTypeCheckBox.Text = "Fuel Type";
-            this.fuelTypeCheckBox.UseVisualStyleBackColor = true;
             // 
             // AddCarInformation
             // 
