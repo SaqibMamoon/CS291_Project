@@ -39,6 +39,21 @@ namespace CS291_Project
                 }
                 dataReader.Close();
 
+                command.CommandText = "select * from rental, car" +
+                                      "where rental.rental_id = car.rental_id";
+                dataReader = command.ExecuteReader();
+                string rentalInformation = "";
+                for (int i = 0; i < dataReader.FieldCount; i++)
+                {
+                    rentalInformation += dataReader[i];
+                    if (i != dataReader.FieldCount)
+                    {
+                        rentalInformation += ", ";
+                    }
+                }
+                customerComboBox.Items.Add(Regex.Replace(rentalInformation, @"\s\s+", " "));
+                dataReader.Close();
+
                 connection.Close();
             }
         }
@@ -74,6 +89,21 @@ namespace CS291_Project
         {
             AddCarInformation addCarInformationForm = new AddCarInformation();
             addCarInformationForm.ShowDialog();
+        }
+
+        private void dropOffButton_Click(object sender, EventArgs e)
+        {
+            if (customerComboBox.SelectedItem == null)
+            {
+                dropOffErrorLabel.Text = "A rental must be selected";
+                return;
+            }
+            else
+            {
+                bookCustomerErrorLabel.Text = "";
+            }
+            string selectedCustomer = customerComboBox.SelectedItem.ToString();
+            int customerID = Int32.Parse(Regex.Match(selectedCustomer, @"\d+").Value);
         }
     }
 }

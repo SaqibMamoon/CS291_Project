@@ -33,11 +33,15 @@
             this.bookButton = new System.Windows.Forms.Button();
             this.bookingLabel = new System.Windows.Forms.Label();
             this.backButton = new System.Windows.Forms.Button();
-            this.database1DataSet = new CS291_Project.Database1DataSet();
-            this.database1DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.addCarInformationButton = new System.Windows.Forms.Button();
             this.bookCustomerErrorLabel = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.dropOffErrorLabel = new System.Windows.Forms.Label();
+            this.selectRentalLabel = new System.Windows.Forms.Label();
+            this.dropOffButton = new System.Windows.Forms.Button();
+            this.rentalComboBox = new System.Windows.Forms.ComboBox();
+            this.database1DataSet = new CS291_Project.Database1DataSet();
+            this.database1DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.database1DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.database1DataSetBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -71,7 +75,7 @@
             // 
             // backButton
             // 
-            this.backButton.Location = new System.Drawing.Point(280, 153);
+            this.backButton.Location = new System.Drawing.Point(280, 230);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(75, 23);
             this.backButton.TabIndex = 5;
@@ -79,19 +83,9 @@
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
-            // database1DataSet
-            // 
-            this.database1DataSet.DataSetName = "Database1DataSet";
-            this.database1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // database1DataSetBindingSource
-            // 
-            this.database1DataSetBindingSource.DataSource = this.database1DataSet;
-            this.database1DataSetBindingSource.Position = 0;
-            // 
             // addCarInformationButton
             // 
-            this.addCarInformationButton.Location = new System.Drawing.Point(50, 144);
+            this.addCarInformationButton.Location = new System.Drawing.Point(50, 221);
             this.addCarInformationButton.Name = "addCarInformationButton";
             this.addCarInformationButton.Size = new System.Drawing.Size(192, 41);
             this.addCarInformationButton.TabIndex = 4;
@@ -114,11 +108,61 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // dropOffErrorLabel
+            // 
+            this.dropOffErrorLabel.AutoSize = true;
+            this.dropOffErrorLabel.Location = new System.Drawing.Point(56, 175);
+            this.dropOffErrorLabel.Name = "dropOffErrorLabel";
+            this.dropOffErrorLabel.Size = new System.Drawing.Size(0, 13);
+            this.dropOffErrorLabel.TabIndex = 9;
+            this.dropOffErrorLabel.Visible = false;
+            // 
+            // selectRentalLabel
+            // 
+            this.selectRentalLabel.AutoSize = true;
+            this.selectRentalLabel.Location = new System.Drawing.Point(47, 126);
+            this.selectRentalLabel.Name = "selectRentalLabel";
+            this.selectRentalLabel.Size = new System.Drawing.Size(74, 13);
+            this.selectRentalLabel.TabIndex = 6;
+            this.selectRentalLabel.Text = "Select Rental:";
+            // 
+            // dropOffButton
+            // 
+            this.dropOffButton.Location = new System.Drawing.Point(254, 140);
+            this.dropOffButton.Name = "dropOffButton";
+            this.dropOffButton.Size = new System.Drawing.Size(75, 23);
+            this.dropOffButton.TabIndex = 8;
+            this.dropOffButton.Text = "Drop off";
+            this.dropOffButton.UseVisualStyleBackColor = true;
+            this.dropOffButton.Click += new System.EventHandler(this.dropOffButton_Click);
+            // 
+            // rentalComboBox
+            // 
+            this.rentalComboBox.FormattingEnabled = true;
+            this.rentalComboBox.Location = new System.Drawing.Point(50, 142);
+            this.rentalComboBox.Name = "rentalComboBox";
+            this.rentalComboBox.Size = new System.Drawing.Size(183, 21);
+            this.rentalComboBox.TabIndex = 7;
+            // 
+            // database1DataSet
+            // 
+            this.database1DataSet.DataSetName = "Database1DataSet";
+            this.database1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // database1DataSetBindingSource
+            // 
+            this.database1DataSetBindingSource.DataSource = this.database1DataSet;
+            this.database1DataSetBindingSource.Position = 0;
+            // 
             // EmployeeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 218);
+            this.ClientSize = new System.Drawing.Size(380, 296);
+            this.Controls.Add(this.dropOffErrorLabel);
+            this.Controls.Add(this.selectRentalLabel);
+            this.Controls.Add(this.dropOffButton);
+            this.Controls.Add(this.rentalComboBox);
             this.Controls.Add(this.bookCustomerErrorLabel);
             this.Controls.Add(this.addCarInformationButton);
             this.Controls.Add(this.backButton);
@@ -145,5 +189,9 @@
         private System.Windows.Forms.Button addCarInformationButton;
         private System.Windows.Forms.Label bookCustomerErrorLabel;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Label dropOffErrorLabel;
+        private System.Windows.Forms.Label selectRentalLabel;
+        private System.Windows.Forms.Button dropOffButton;
+        private System.Windows.Forms.ComboBox rentalComboBox;
     }
 }
