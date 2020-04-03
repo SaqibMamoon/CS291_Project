@@ -59,7 +59,7 @@ namespace CS291_Project
             chart1.ChartAreas[0].AxisX.Minimum = 0;
             chart1.ChartAreas[0].AxisY.Minimum = 0;
             chart1.ChartAreas[0].AxisX.Maximum = 4;
-            chart1.ChartAreas[0].AxisY.Maximum = 500;
+            chart1.ChartAreas[0].AxisY.Maximum = 50;
 
             cSBool b1 = new cSBool(false, "colors", button1), b2 = new cSBool(false, "doors", button2), b3 = new cSBool(false, "style", button3),
             b4 = new cSBool(false, "age", button4), b5 = new cSBool(false, "sun_roof", button5), b6 = new cSBool(false, "fuelType", button6),
@@ -85,10 +85,10 @@ namespace CS291_Project
             b14.button.BackColor = Color.Red; b14.button.ForeColor = Color.White; b14.button.Text = "Power Seats"; b14.button.TabIndex = 14; buts.Add("b14", b14);
             b15.button.BackColor = Color.Red; b15.button.ForeColor = Color.White; b15.button.Text = "Blue Tooth"; b15.button.TabIndex = 15; buts.Add("b15", b15);
             b16.button.BackColor = Color.Red; b16.button.ForeColor = Color.White; b16.button.Text = "Models"; b16.button.TabIndex = 16; buts.Add("b16", b16);
-            b17.button.BackColor = Color.Red; b17.button.ForeColor = Color.White; b17.button.Text = "Sales/Branch"; b17.button.TabIndex = 17; buts.Add("b17", b17);
-            b18.button.BackColor = Color.Red; b18.button.ForeColor = Color.White; b18.button.Text = "Customers/Branch"; b18.button.TabIndex = 18; buts.Add("b18", b18);
-            b19.button.BackColor = Color.Red; b19.button.ForeColor = Color.White; b19.button.Text = "Cars/Branch"; b19.button.TabIndex = 19; buts.Add("b19", b19);
-            b20.button.BackColor = Color.Red; b20.button.ForeColor = Color.White; b20.button.Text = "Employees/branch"; b20.button.TabIndex = 20; buts.Add("b20", b20);
+            b17.button.BackColor = Color.Red; b17.button.ForeColor = Color.White; b17.button.Text = "Sales/Branch"; b17.button.TabIndex = 17; buts.Add("b17", b17); //Here we do groupby branch_id, count (*) with a select for both
+            b18.button.BackColor = Color.Red; b18.button.ForeColor = Color.White; b18.button.Text = "Customers/Branch"; b18.button.TabIndex = 18; buts.Add("b18", b18); //Here we do group by branch_id, customer_id and then another groupby branch_id, count(*) for the number of unique customers 
+            b19.button.BackColor = Color.Red; b19.button.ForeColor = Color.White; b19.button.Text = "Cars/Branch"; b19.button.TabIndex = 19; buts.Add("b19", b19); //Here we do a simple if branch.branch_id = car.branch_id with select branch.name, count (*)
+            b20.button.BackColor = Color.Red; b20.button.ForeColor = Color.White; b20.button.Text = "Employees/branch"; b20.button.TabIndex = 20; buts.Add("b20", b20); //Here we do branch.branch_id = employee.branch_id, SELECT branch.name, count(*)
 
             startDate = DateTime.Now; endDate = DateTime.Now;
 
@@ -187,18 +187,22 @@ namespace CS291_Project
         private void b17C(object sender, EventArgs e)
         {
             customerChartUpdate(buts["b17"], buts["b17"].button, "b17");
+            choice17();
         }
         private void b18C(object sender, EventArgs e)
         {
             customerChartUpdate(buts["b18"], buts["b18"].button, "b18");
+            choice18();
         }
         private void b19C(object sender, EventArgs e)
         {
             customerChartUpdate(buts["b19"], buts["b19"].button, "b19");
+            choice19();
         }
         private void b20C(object sender, EventArgs e)
         {
             customerChartUpdate(buts["b20"], buts["b20"].button, "b20");
+            choice20();
         }
         private void tablesComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -242,10 +246,10 @@ namespace CS291_Project
             chart1.Series.Add("Series1");
 
             //Just resets all look ups for car transactions to none-existent
-            for (int i = 1; i < 17; i++)
+            for (int i = 1; i < 21; i++)
             {
                 k = "b" + i.ToString();
-                if (buts[k].b)
+                if (buts[k].b && k != key)
                 {
                     buts[k].button.BackColor = Color.Red;
                     cSBool bb = buts[k];
@@ -265,8 +269,218 @@ namespace CS291_Project
                 c.b = true;
                 buts[key] = c;
             }
-            this.updateChartCust();
+        }
 
+        private void choice17()
+        {
+            //Here we do groupby branch_id, count (*) with a select for both
+            using (SqlConnection conn = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                                                                    "AttachDbFilename=|DataDirectory|Database1.mdf;" +
+                                                                    "Integrated Security=True"))
+            {
+                conn.Open(); 
+                SqlCommand comm = new SqlCommand("SELECT branch.name, count (*) FROM branch, rental WHERE branch.branch_id = rental.pickup_branch_id AND ((start_date BETWEEN @startD AND @endD) OR (end_date BETWEEN @startD AND @endD)) GROUP BY branch.branch_id, branch.name", conn);
+                comm.Parameters.AddWithValue("@startD", startDate);
+                comm.Parameters.AddWithValue("@endD", endDate);
+                int columns=0, max=0;
+                using (SqlDataReader reader = comm.ExecuteReader())
+                {
+                    List<string> temp = new List<string>();
+                    while (true)
+                    {
+                        try
+                        {
+                            int count; string name;
+                            if (reader.Read())
+                            {
+                                name = reader[0].ToString();
+                                count = (Int32)reader[1];
+                                chart1.Series["Series1"].Points.AddXY(name, count);
+                                columns++;
+                                if (count > max)
+                                {
+                                    max = count+ 2;
+                                }
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        catch
+                        {
+                            break;
+                        }
+                    }
+
+                }
+
+                chart1.ChartAreas[0].AxisX.Maximum = columns + 1;
+                chart1.ChartAreas[0].AxisY.Maximum = max;
+            }
+        }
+        private void choice18()
+        {
+            //Here we do group by branch_id, customer_id and then another groupby branch_id, count(*) for the number of unique customers 
+            using (SqlConnection conn = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                                                                    "AttachDbFilename=|DataDirectory|Database1.mdf;" +
+                                                                    "Integrated Security=True"))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand("SELECT branch.name, count (*) FROM branch, rental, customer WHERE branch.branch_id = rental.pickup_branch_id " +
+                    "AND rental.customer_id = customer.customer_id " +
+                    "AND ((start_date BETWEEN @startD AND @endD) OR (end_date BETWEEN @startD AND @endD)) GROUP BY branch.name", conn);
+                comm.Parameters.AddWithValue("@startD", startDate);
+                comm.Parameters.AddWithValue("@endD", endDate);
+                int columns = 0, max = 0;
+                using (SqlDataReader reader = comm.ExecuteReader())
+                {
+                    List<string> temp = new List<string>();
+                    while (true)
+                    {
+                        try
+                        {
+                            int count; string name;
+                            if (reader.Read())
+                            {
+                                name = reader[0].ToString();
+                                count = (Int32)reader[1];
+                                chart1.Series["Series1"].Points.AddXY(name, count);
+                                columns++;
+                                if (count > max)
+                                {
+                                    max = count + 2;
+                                }
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        catch
+                        {
+                            break;
+                        }
+                    }
+
+                }
+
+                chart1.ChartAreas[0].AxisX.Maximum = columns + 1;
+                chart1.ChartAreas[0].AxisY.Maximum = max;
+            }
+        }
+        private void choice19()
+        {
+            //Here we do a simple if branch.branch_id = car.branch_id with select branch.name, count (*)
+            using (SqlConnection conn = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                                                                    "AttachDbFilename=|DataDirectory|Database1.mdf;" +
+                                                                    "Integrated Security=True"))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand("SELECT branch.name, count (*) FROM branch, car WHERE branch.branch_id = car.branch_id group by branch.name",conn);
+                int columns = 0, max = 0;
+                using (SqlDataReader reader = comm.ExecuteReader())
+                {
+                    List<string> temp = new List<string>();
+                    while (true)
+                    {
+                        try
+                        {
+                            int count; string name;
+                            if (reader.Read())
+                            {
+                                name = reader[0].ToString();
+                                count = (Int32)reader[1];
+                                chart1.Series["Series1"].Points.AddXY(name, count);
+                                columns++;
+                                if (count > max)
+                                {
+                                    max = count + 2;
+                                }
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        catch
+                        {
+                            break;
+                        }
+                    }
+
+                }
+
+                chart1.ChartAreas[0].AxisX.Maximum = columns + 1;
+                chart1.ChartAreas[0].AxisY.Maximum = max;
+            }
+        }
+        private void choice20()
+        {
+            //Here we do branch.branch_id = employee.branch_id, SELECT branch.name, count(*)
+            using (SqlConnection conn = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                                                                    "AttachDbFilename=|DataDirectory|Database1.mdf;" +
+                                                                    "Integrated Security=True"))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand("SELECT branch.name, count (*) FROM branch, employee WHERE branch.branch_id = employee.branch_id GROUP BY branch.name", conn);
+                int columns = 0, max = 0;
+                using (SqlDataReader reader = comm.ExecuteReader())
+                {
+                    List<string> temp = new List<string>();
+                    while (true)
+                    {
+                        try
+                        {
+                            int count; string name;
+                            if (reader.Read())
+                            {
+                                name = reader[0].ToString();
+                                count = (Int32)reader[1];
+                                chart1.Series["Series1"].Points.AddXY(name, count);
+                                columns++;
+                                if (count > max)
+                                {
+                                    max = count + 2;
+                                }
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        catch
+                        {
+                            break;
+                        }
+                    }
+                    conn.Close();
+
+                }
+                if (columns != 0)
+                {
+                    chart1.ChartAreas[0].AxisX.Maximum = columns + 1;
+                    chart1.ChartAreas[0].AxisY.Maximum = max;
+                }
+                else
+                {
+                    using (SqlConnection connn = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                                                                    "AttachDbFilename=|DataDirectory|Database1.mdf;" +
+                                                                    "Integrated Security=True"))
+                    {
+                        chart1.ChartAreas[0].AxisX.Maximum = 3;
+                        connn.Open();
+                        SqlCommand commm = new SqlCommand("SELECT count (*) from car_type", connn);
+                        int carInv = Convert.ToInt32(commm.ExecuteScalar());
+                        commm = new SqlCommand("SELECT count (*) from rental", connn);
+                        int carRent = Convert.ToInt32(commm.ExecuteScalar());
+                        chart1.Series["Series1"].Points.AddXY("Total Cars in Inventory", carInv.ToString()); //This is how you add both X and Y values simultaneously
+                        chart1.Series["Series1"].Points.AddXY("Total Cars rented", carRent.ToString());
+                        chart1.AlignDataPointsByAxisLabel();
+                        connn.Close();
+                    }
+                }
+            }
         }
 
         private void clearTablesButton_Click(object sender, EventArgs e)
@@ -408,96 +622,6 @@ namespace CS291_Project
             try
             {
                 toolsRen = Query(store, "car, car_type, pricing_model, rental WHERE rental.car_id = car.car_id and car.type_id = car_type.type_id and car_type.pricing_id = pricing_model.pricing_id");
-                //toolsRen = this.recurQuery(store.Count, store, toolsRen, "car, car_type, pricing_model, rental WHERE rental.car_id = car.car_id and car.type_id = car_type.type_id and car_type.pricing_id = pricing_model.pricing_id");
-                foreach (recursiveTool tool in toolsRen)
-                {
-                    chart1.Series["Series1"].Points.AddXY(tool.direction, tool.count);
-                }
-            }
-            catch
-            {
-                using (SqlConnection conn = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
-                                                                    "AttachDbFilename=|DataDirectory|Database1.mdf;" +
-                                                                    "Integrated Security=True"))
-                {
-                    chart1.ChartAreas[0].AxisX.Maximum = 3;
-                    conn.Open();
-                    SqlCommand comm = new SqlCommand("SELECT count (*) from car_type", conn);
-                    int carInv = Convert.ToInt32(comm.ExecuteScalar());
-                    comm = new SqlCommand("SELECT count (*) from rental", conn);
-                    int carRent = Convert.ToInt32(comm.ExecuteScalar());
-                    chart1.Series["Series1"].Points.AddXY("Total Cars in Inventory", carInv.ToString()); //This is how you add both X and Y values simultaneously
-                    chart1.Series["Series1"].Points.AddXY("Total Cars rented", carRent.ToString());
-                    chart1.AlignDataPointsByAxisLabel();
-                    conn.Close();
-                }
-            }
-        }
-
-        private void updateChartCust()
-        {
-            chart1.Series.Clear();
-            chart1.Series.Add("Series1");
-            List<List<string>> store = new List<List<String>>();
-            int count = 0;
-            foreach(KeyValuePair<string, cSBool> entry in buts)
-            {
-                count++;
-                if (count > 16)
-                {
-                    if (entry.Value.b)
-                    {
-                        using (SqlConnection conn = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
-                                                                        "AttachDbFilename=|DataDirectory|Database1.mdf;" +
-                                                                        "Integrated Security=True"))
-                        {
-                            conn.Open();
-                            string command = "SELECT DISTINCT @column FROM branch, car_type, car, customer, employee";
-                            SqlCommand comm = new SqlCommand(command, conn);
-                            comm.Parameters.AddWithValue("@column", entry.Value.s);
-                            System.Diagnostics.Debug.WriteLine(command, entry.Value.s);
-                            using(SqlDataReader reader = comm.ExecuteReader())
-                            {
-                                List<string> temp = new List<string>();
-                                while (true)
-                                {
-                                    try
-                                    {
-                                        if (reader.Read())
-                                        {
-                                            System.Diagnostics.Debug.WriteLine("Here");
-                                            temp.Add(" and " + entry.Value.s + " IN ('" + reader[0].ToString().Replace(" ", "") + "')");
-                                            System.Diagnostics.Debug.WriteLine(temp[-1]);
-                                        }
-                                        else
-                                        {
-                                            break;
-                                        }
-                                    }
-                                    catch
-                                    {
-                                        break;
-                                    }
-                                }
-                                store.Add(temp);
-                            }
-                        }
-                    }
-                }
-            }
-            int paths = 1;
-            foreach (List<string> ss in store)
-            {
-                paths *= ss.Count;
-            }
-            chart1.ChartAreas[0].AxisX.Minimum = 0;
-            chart1.ChartAreas[0].AxisX.Maximum = paths + 1;
-            chart1.ChartAreas[0].AxisY.Minimum = 0;
-            chart1.ChartAreas[0].AxisY.Maximum = 5;
-            List<recursiveTool> toolsRen = new List<recursiveTool>();
-            try
-            {
-                toolsRen = Query(store, "car, customer, employee, branch, rental WHERE branch.branch_id = car.branch_id and rental.pickup_branch_id = branch.branch_id");
                 //toolsRen = this.recurQuery(store.Count, store, toolsRen, "car, car_type, pricing_model, rental WHERE rental.car_id = car.car_id and car.type_id = car_type.type_id and car_type.pricing_id = pricing_model.pricing_id");
                 foreach (recursiveTool tool in toolsRen)
                 {
