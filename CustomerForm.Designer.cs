@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			this.label1 = new System.Windows.Forms.Label();
+			this.customerLabel = new System.Windows.Forms.Label();
 			this.fromDateTimePicker = new System.Windows.Forms.DateTimePicker();
 			this.label2 = new System.Windows.Forms.Label();
 			this.pickupBranchComboBox = new System.Windows.Forms.ComboBox();
@@ -60,14 +60,14 @@
 			((System.ComponentModel.ISupportInitialize)(this.database1DataSet2)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// label1
+			// customerLabel
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(36, 9);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(123, 13);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "Booking for customer: X ";
+			this.customerLabel.AutoSize = true;
+			this.customerLabel.Location = new System.Drawing.Point(36, 9);
+			this.customerLabel.Name = "customerLabel";
+			this.customerLabel.Size = new System.Drawing.Size(123, 13);
+			this.customerLabel.TabIndex = 0;
+			this.customerLabel.Text = "Booking for customer: X ";
 			// 
 			// fromDateTimePicker
 			// 
@@ -290,7 +290,7 @@
 			this.Controls.Add(this.pickupBranchComboBox);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.fromDateTimePicker);
-			this.Controls.Add(this.label1);
+			this.Controls.Add(this.customerLabel);
 			this.Name = "CustomerForm";
 			this.Text = "Booking";
 			this.Load += new System.EventHandler(this.CustomerForm_Load);
@@ -306,7 +306,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label customerLabel;
         private System.Windows.Forms.DateTimePicker fromDateTimePicker;
         private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.ComboBox pickupBranchComboBox;

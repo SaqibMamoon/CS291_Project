@@ -56,6 +56,17 @@ namespace CS291_Project
                 }
                 dataReader.Close();
 
+                command.Parameters.AddWithValue("@customerID", customerID);
+                command.CommandText = "select first_name, last_name from customer where customer_id = @customerID";
+                dataReader = command.ExecuteReader();
+                dataReader.Read();
+                string firstName = (string)dataReader[0];
+                string lastName = (string)dataReader[1];
+
+                customerLabel.Text = $"Booking for customer {firstName.Trim()} {lastName.Trim()}.";
+
+                dataReader.Close();
+
                 connection.Close();
             }
         }
