@@ -146,10 +146,18 @@ namespace CS291_Project
                 while (dataReader.Read())
                 {
                     int promisedDropoffBranchID = (int)dataReader[0];
-                    int gold_star = (int)dataReader[0];
-                    if (branchID != promisedDropoffBranchID && gold_star == 0)
+                    bool gold_star = (bool)dataReader[1];
+
+                    if (branchID != promisedDropoffBranchID)
                     {
-                        MessageBox.Show("Drop off branch does not match the planned drop off branch. Customer must pay a $40 fee.");
+                        if (gold_star)
+                        {
+                            MessageBox.Show("Drop off fee waived because the customer is gold star member.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Drop off branch does not match the planned drop off branch. Customer must pay a $40 fee.");
+                        }
                     }
                 }
                 dataReader.Close();
