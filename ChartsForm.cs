@@ -66,7 +66,7 @@ namespace CS291_Project
             b7 = new cSBool(false, "daily_price", button7), b8 = new cSBool(false, "weekly_price", button8), b9 = new cSBool(false, "monthly_price", button9),
             b10 = new cSBool(false, "heatedSeat", button10), b11 = new cSBool(false, "stereoQual", button11), b12 = new cSBool(false, "manual", button12), b13 = new cSBool(false, "cylinders", button13),
             b14 = new cSBool(false, "power_seats", button14), b15 = new cSBool(false, "bluetooth", button15), b16 = new cSBool(false, "model", button16),
-            b17 = new cSBool(false, "", button17), b18 = new cSBool(false, "", button18), b19 = new cSBool(false, "", button19), b20 = new cSBool(false, "", button20);
+            b17 = new cSBool(false, "pickup_branch_id", button17), b18 = new cSBool(false, "customer_id", button18), b19 = new cSBool(false, "car_id", button19), b20 = new cSBool(false, "employee_id", button20);
 
 
             b1.button.BackColor = Color.Red; b1.button.ForeColor = Color.White; b1.button.Text = "Colors"; b1.button.TabIndex = 1;buts.Add("b1", b1);
@@ -88,7 +88,7 @@ namespace CS291_Project
             b17.button.BackColor = Color.Red; b17.button.ForeColor = Color.White; b17.button.Text = "Sales/Branch"; b17.button.TabIndex = 17; buts.Add("b17", b17);
             b18.button.BackColor = Color.Red; b18.button.ForeColor = Color.White; b18.button.Text = "Customers/Branch"; b18.button.TabIndex = 18; buts.Add("b18", b18);
             b19.button.BackColor = Color.Red; b19.button.ForeColor = Color.White; b19.button.Text = "Cars/Branch"; b19.button.TabIndex = 19; buts.Add("b19", b19);
-            b20.button.BackColor = Color.Red; b20.button.ForeColor = Color.White; b20.button.Text = ""; b20.button.TabIndex = 20; buts.Add("b20", b20);
+            b20.button.BackColor = Color.Red; b20.button.ForeColor = Color.White; b20.button.Text = "Employees/branch"; b20.button.TabIndex = 20; buts.Add("b20", b20);
 
             startDate = DateTime.Now; endDate = DateTime.Now;
 
@@ -240,22 +240,19 @@ namespace CS291_Project
             string k;
             chart1.Series.Clear();
             chart1.Series.Add("Series1");
+
             //Just resets all look ups for car transactions to none-existent
-            for (int i = 1; i < 21; i++)
+            for (int i = 1; i < 17; i++)
             {
-                if (!key.Contains(i.ToString()))
+                k = "b" + i.ToString();
+                if (buts[k].b)
                 {
-                    k = "b" + i.ToString();
-                    if (buts[k].b)
-                    {
-                        buts[k].button.BackColor = Color.Red;
-                        cSBool bb = buts[k];
-                        bb.b = false;
-                        buts[k] = bb;
-                    }
+                    buts[k].button.BackColor = Color.Red;
+                    cSBool bb = buts[k];
+                    bb.b = false;
+                    buts[k] = bb;
                 }
             }
-
             if (buts[key].b)
             {
                 c.button.BackColor = Color.Red;
@@ -264,7 +261,9 @@ namespace CS291_Project
             }
             else
             {
-                c.button.BackColor = Color.Red;
+                c.button.BackColor = Color.Green;
+                c.b = true;
+                buts[key] = c;
             }
             this.updateChartCust();
 
@@ -370,15 +369,13 @@ namespace CS291_Project
                             using (SqlDataReader reader = comm.ExecuteReader())
                             {
                                 List<string> temp = new List<string>();
-                                int cnt = 0;
                                 while (true)
                                 {
                                     try
                                     {
                                         if (reader.Read())
                                         {
-                                            temp.Add(" and " + entry.Value.s + " IN ('" + reader[cnt].ToString().Replace(" ", "") + "')");
-                                            System.Diagnostics.Debug.WriteLine(" and " + entry.Value.s + " IN ('" + reader[cnt].ToString().Replace(" ", "") + "')", "Work");
+                                            temp.Add(" and " + entry.Value.s + " IN ('" + reader[0].ToString().Replace(" ", "") + "')");
                                         }
                                         else
                                         {
@@ -410,7 +407,7 @@ namespace CS291_Project
             List<recursiveTool> toolsRen = new List<recursiveTool>();
             try
             {
-                toolsRen = recurQuery(store.Count, store, "car, car_type, pricing_model, rental WHERE rental.car_id = car.car_id and car.type_id = car_type.type_id and car_type.pricing_id = pricing_model.pricing_id");
+                toolsRen = Query(store, "car, car_type, pricing_model, rental WHERE rental.car_id = car.car_id and car.type_id = car_type.type_id and car_type.pricing_id = pricing_model.pricing_id");
                 //toolsRen = this.recurQuery(store.Count, store, toolsRen, "car, car_type, pricing_model, rental WHERE rental.car_id = car.car_id and car.type_id = car_type.type_id and car_type.pricing_id = pricing_model.pricing_id");
                 foreach (recursiveTool tool in toolsRen)
                 {
@@ -442,8 +439,7 @@ namespace CS291_Project
             chart1.Series.Clear();
             chart1.Series.Add("Series1");
             List<List<string>> store = new List<List<String>>();
-            int count = 0;         
-
+            int count = 0;
             foreach(KeyValuePair<string, cSBool> entry in buts)
             {
                 count++;
@@ -456,71 +452,80 @@ namespace CS291_Project
                                                                         "Integrated Security=True"))
                         {
                             conn.Open();
-                            string command = "SELECT DISTINCT " + entry.Value.s + " FROM car, car_type, pricing_model, rental, branch" +
-                                "WHERE car.type_id = car_type.type_id AND car_type.pricing_id = pricing_model.pricing_id and car.car_id = rental.car_id and (branch.branch_id = rental.pickup_branch_id or branch.branch_id = rental.dropoff_branch_id)";
+                            string command = "SELECT DISTINCT @column FROM branch, car_type, car, customer, employee";
                             SqlCommand comm = new SqlCommand(command, conn);
-                            using (SqlDataReader reader = comm.ExecuteReader())
+                            comm.Parameters.AddWithValue("@column", entry.Value.s);
+                            System.Diagnostics.Debug.WriteLine(command, entry.Value.s);
+                            using(SqlDataReader reader = comm.ExecuteReader())
                             {
                                 List<string> temp = new List<string>();
-                                while (reader.Read())
+                                while (true)
                                 {
-                                    foreach (var read in reader)
+                                    try
                                     {
-                                        temp.Add(" AND " + read.ToString() + " = " + entry.Value.s);
+                                        if (reader.Read())
+                                        {
+                                            System.Diagnostics.Debug.WriteLine("Here");
+                                            temp.Add(" and " + entry.Value.s + " IN ('" + reader[0].ToString().Replace(" ", "") + "')");
+                                            System.Diagnostics.Debug.WriteLine(temp[-1]);
+                                        }
+                                        else
+                                        {
+                                            break;
+                                        }
+                                    }
+                                    catch
+                                    {
+                                        break;
                                     }
                                 }
                                 store.Add(temp);
                             }
-                            conn.Close();
                         }
                     }
                 }
             }
-        }
-
-        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-        // 
-        private List<recursiveTool> recurQuery(int n, List<List<string>> vs, string fromWhere)
-        {
-            /*
-            if (n == 1)
+            int paths = 1;
+            foreach (List<string> ss in store)
             {
-                //Goes through each item
-                for (int i = 0; i < vs[n - 1].Count; i++)
+                paths *= ss.Count;
+            }
+            chart1.ChartAreas[0].AxisX.Minimum = 0;
+            chart1.ChartAreas[0].AxisX.Maximum = paths + 1;
+            chart1.ChartAreas[0].AxisY.Minimum = 0;
+            chart1.ChartAreas[0].AxisY.Maximum = 5;
+            List<recursiveTool> toolsRen = new List<recursiveTool>();
+            try
+            {
+                toolsRen = Query(store, "car, customer, employee, branch, rental WHERE branch.branch_id = car.branch_id and rental.pickup_branch_id = branch.branch_id");
+                //toolsRen = this.recurQuery(store.Count, store, toolsRen, "car, car_type, pricing_model, rental WHERE rental.car_id = car.car_id and car.type_id = car_type.type_id and car_type.pricing_id = pricing_model.pricing_id");
+                foreach (recursiveTool tool in toolsRen)
                 {
-                    //Goes through each portion of recursive tools to put the item into
-                    for (int j = 0; j < recursiveTools.Count / vs[n - 1].Count; j++)
-                    {
-                        recursiveTool temp = recursiveTools[(i * recursiveTools.Count / vs[n - 1].Count) + j];
-                        temp.direction += vs[n - 1][i];
-
-                        using (SqlConnection conn = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                    chart1.Series["Series1"].Points.AddXY(tool.direction, tool.count);
+                }
+            }
+            catch
+            {
+                using (SqlConnection conn = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
                                                                     "AttachDbFilename=|DataDirectory|Database1.mdf;" +
                                                                     "Integrated Security=True"))
-                        {
-                            conn.Open();
-                            string start = startDate.ToString("yyyy-MM-dd");
-                            string end = endDate.ToString("yyyy-MM-dd");
-                            System.Diagnostics.Debug.WriteLine(start);
-                            string start_and_end_check = " AND ((start_date BETWEEN @startD AND @endD) OR (end_date BETWEEN @startD AND @endD))";
-                            string command = "SELECT count (*) FROM " + fromWhere + temp.direction + start_and_end_check;
-                            System.Diagnostics.Debug.WriteLine(command, "checker");
-                            SqlCommand comm = new SqlCommand(command, conn);
-                            comm.Parameters.AddWithValue("@startD", startDate.ToString("yyyy-MM-dd"));
-                            comm.Parameters.AddWithValue("@endD", endDate.ToString("yyyy-MM-dd"));
-                            int lemming = (Int32)comm.ExecuteScalar();
-                            temp.count = lemming;
-                            conn.Close();
-                        }
-                        recursiveTools[(i * recursiveTools.Count / vs[n - 1].Count) + j] = temp;
-                    }
+                {
+                    chart1.ChartAreas[0].AxisX.Maximum = 3;
+                    conn.Open();
+                    SqlCommand comm = new SqlCommand("SELECT count (*) from car_type", conn);
+                    int carInv = Convert.ToInt32(comm.ExecuteScalar());
+                    comm = new SqlCommand("SELECT count (*) from rental", conn);
+                    int carRent = Convert.ToInt32(comm.ExecuteScalar());
+                    chart1.Series["Series1"].Points.AddXY("Total Cars in Inventory", carInv.ToString()); //This is how you add both X and Y values simultaneously
+                    chart1.Series["Series1"].Points.AddXY("Total Cars rented", carRent.ToString());
+                    chart1.AlignDataPointsByAxisLabel();
+                    conn.Close();
                 }
-                return recursiveTools;
-
-            }*/
+            }
+        }
+        // 
+        private List<recursiveTool> Query(List<List<string>> vs, string fromWhere)
+        {
             List<recursiveTool> tools = new List<recursiveTool>();
             List<string> nm = vs[0];
             //This is the proper way to do it
