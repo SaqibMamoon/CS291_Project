@@ -40,6 +40,8 @@
             this.selectRentalLabel = new System.Windows.Forms.Label();
             this.dropOffButton = new System.Windows.Forms.Button();
             this.rentalComboBox = new System.Windows.Forms.ComboBox();
+            this.branchComboBox = new System.Windows.Forms.ComboBox();
+            this.selectBranchLabel = new System.Windows.Forms.Label();
             this.database1DataSet = new CS291_Project.Database1DataSet();
             this.database1DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.database1DataSet)).BeginInit();
@@ -49,14 +51,14 @@
             // customerComboBox
             // 
             this.customerComboBox.FormattingEnabled = true;
-            this.customerComboBox.Location = new System.Drawing.Point(50, 60);
+            this.customerComboBox.Location = new System.Drawing.Point(50, 55);
             this.customerComboBox.Name = "customerComboBox";
-            this.customerComboBox.Size = new System.Drawing.Size(183, 21);
+            this.customerComboBox.Size = new System.Drawing.Size(236, 21);
             this.customerComboBox.TabIndex = 1;
             // 
             // bookButton
             // 
-            this.bookButton.Location = new System.Drawing.Point(254, 58);
+            this.bookButton.Location = new System.Drawing.Point(348, 57);
             this.bookButton.Name = "bookButton";
             this.bookButton.Size = new System.Drawing.Size(75, 23);
             this.bookButton.TabIndex = 2;
@@ -67,7 +69,7 @@
             // bookingLabel
             // 
             this.bookingLabel.AutoSize = true;
-            this.bookingLabel.Location = new System.Drawing.Point(47, 44);
+            this.bookingLabel.Location = new System.Drawing.Point(47, 39);
             this.bookingLabel.Name = "bookingLabel";
             this.bookingLabel.Size = new System.Drawing.Size(86, 13);
             this.bookingLabel.TabIndex = 0;
@@ -75,7 +77,7 @@
             // 
             // backButton
             // 
-            this.backButton.Location = new System.Drawing.Point(280, 230);
+            this.backButton.Location = new System.Drawing.Point(307, 252);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(75, 23);
             this.backButton.TabIndex = 5;
@@ -85,7 +87,7 @@
             // 
             // addCarInformationButton
             // 
-            this.addCarInformationButton.Location = new System.Drawing.Point(50, 221);
+            this.addCarInformationButton.Location = new System.Drawing.Point(77, 243);
             this.addCarInformationButton.Name = "addCarInformationButton";
             this.addCarInformationButton.Size = new System.Drawing.Size(192, 41);
             this.addCarInformationButton.TabIndex = 4;
@@ -96,7 +98,7 @@
             // bookCustomerErrorLabel
             // 
             this.bookCustomerErrorLabel.AutoSize = true;
-            this.bookCustomerErrorLabel.Location = new System.Drawing.Point(56, 93);
+            this.bookCustomerErrorLabel.Location = new System.Drawing.Point(56, 88);
             this.bookCustomerErrorLabel.Name = "bookCustomerErrorLabel";
             this.bookCustomerErrorLabel.Size = new System.Drawing.Size(143, 13);
             this.bookCustomerErrorLabel.TabIndex = 3;
@@ -111,24 +113,23 @@
             // dropOffErrorLabel
             // 
             this.dropOffErrorLabel.AutoSize = true;
-            this.dropOffErrorLabel.Location = new System.Drawing.Point(56, 175);
+            this.dropOffErrorLabel.Location = new System.Drawing.Point(307, 187);
             this.dropOffErrorLabel.Name = "dropOffErrorLabel";
             this.dropOffErrorLabel.Size = new System.Drawing.Size(0, 13);
             this.dropOffErrorLabel.TabIndex = 9;
-            this.dropOffErrorLabel.Visible = false;
             // 
             // selectRentalLabel
             // 
             this.selectRentalLabel.AutoSize = true;
-            this.selectRentalLabel.Location = new System.Drawing.Point(47, 126);
+            this.selectRentalLabel.Location = new System.Drawing.Point(47, 123);
             this.selectRentalLabel.Name = "selectRentalLabel";
-            this.selectRentalLabel.Size = new System.Drawing.Size(74, 13);
+            this.selectRentalLabel.Size = new System.Drawing.Size(69, 13);
             this.selectRentalLabel.TabIndex = 6;
-            this.selectRentalLabel.Text = "Select Rental:";
+            this.selectRentalLabel.Text = "Select rental:";
             // 
             // dropOffButton
             // 
-            this.dropOffButton.Location = new System.Drawing.Point(254, 140);
+            this.dropOffButton.Location = new System.Drawing.Point(348, 141);
             this.dropOffButton.Name = "dropOffButton";
             this.dropOffButton.Size = new System.Drawing.Size(75, 23);
             this.dropOffButton.TabIndex = 8;
@@ -139,10 +140,27 @@
             // rentalComboBox
             // 
             this.rentalComboBox.FormattingEnabled = true;
-            this.rentalComboBox.Location = new System.Drawing.Point(50, 142);
+            this.rentalComboBox.Location = new System.Drawing.Point(50, 139);
             this.rentalComboBox.Name = "rentalComboBox";
-            this.rentalComboBox.Size = new System.Drawing.Size(183, 21);
+            this.rentalComboBox.Size = new System.Drawing.Size(236, 21);
             this.rentalComboBox.TabIndex = 7;
+            // 
+            // branchComboBox
+            // 
+            this.branchComboBox.FormattingEnabled = true;
+            this.branchComboBox.Location = new System.Drawing.Point(50, 179);
+            this.branchComboBox.Name = "branchComboBox";
+            this.branchComboBox.Size = new System.Drawing.Size(236, 21);
+            this.branchComboBox.TabIndex = 10;
+            // 
+            // selectBranchLabel
+            // 
+            this.selectBranchLabel.AutoSize = true;
+            this.selectBranchLabel.Location = new System.Drawing.Point(47, 163);
+            this.selectBranchLabel.Name = "selectBranchLabel";
+            this.selectBranchLabel.Size = new System.Drawing.Size(148, 13);
+            this.selectBranchLabel.TabIndex = 11;
+            this.selectBranchLabel.Text = "Select a branch to drop off at:";
             // 
             // database1DataSet
             // 
@@ -158,7 +176,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 296);
+            this.ClientSize = new System.Drawing.Size(479, 296);
+            this.Controls.Add(this.selectBranchLabel);
+            this.Controls.Add(this.branchComboBox);
             this.Controls.Add(this.dropOffErrorLabel);
             this.Controls.Add(this.selectRentalLabel);
             this.Controls.Add(this.dropOffButton);
@@ -193,5 +213,7 @@
         private System.Windows.Forms.Label selectRentalLabel;
         private System.Windows.Forms.Button dropOffButton;
         private System.Windows.Forms.ComboBox rentalComboBox;
+        private System.Windows.Forms.ComboBox branchComboBox;
+        private System.Windows.Forms.Label selectBranchLabel;
     }
 }
