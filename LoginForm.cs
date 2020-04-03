@@ -14,7 +14,7 @@ namespace CS291_Project
 {
     public partial class LoginForm : Form
     {
-		string username =  "";
+        string username = "";
         string password = "";
 
         public LoginForm()
@@ -108,7 +108,7 @@ namespace CS291_Project
                         if (reader[0].ToString() != "")
                             changePage(new CustomerForm(0));
                         else if (reader[1].ToString() != "")
-							changePage(new CustomerForm(0));
+							changePage(new EmployeeForm());
                         else if (reader[2].ToString() != "")
                             changePage(new ChartsForm());
                         else
