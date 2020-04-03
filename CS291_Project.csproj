@@ -94,11 +94,11 @@
     <Compile Include="EmployeeForm.Designer.cs">
       <DependentUpon>EmployeeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddCarForm.cs">
+    <Compile Include="AddCarInformation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddCarForm.Designer.cs">
-      <DependentUpon>AddCarForm.cs</DependentUpon>
+    <Compile Include="AddCarInformation.Designer.cs">
+      <DependentUpon>AddCarInformation.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -114,8 +114,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddCarForm.resx">
-      <DependentUpon>AddCarForm.cs</DependentUpon>
+    <EmbeddedResource Include="AddCarInformation.resx">
+      <DependentUpon>AddCarInformation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChartsForm.resx">
       <DependentUpon>ChartsForm.cs</DependentUpon>
