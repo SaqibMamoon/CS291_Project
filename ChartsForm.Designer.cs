@@ -126,7 +126,6 @@
             this.button20.TabIndex = 46;
             this.button20.Text = "button20";
             this.button20.UseVisualStyleBackColor = true;
-            this.button17.Click += new System.EventHandler(this.b20C);
             // 
             // button19
             // 
@@ -136,7 +135,6 @@
             this.button19.TabIndex = 45;
             this.button19.Text = "button19";
             this.button19.UseVisualStyleBackColor = true;
-            this.button17.Click += new System.EventHandler(this.b19C);
             // 
             // button18
             // 
@@ -146,7 +144,6 @@
             this.button18.TabIndex = 44;
             this.button18.Text = "button18";
             this.button18.UseVisualStyleBackColor = true;
-            this.button17.Click += new System.EventHandler(this.b18C);
             // 
             // button17
             // 
@@ -355,6 +352,7 @@
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(200, 22);
             this.dateTimePicker2.TabIndex = 23;
+            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.endTimeChanged);
             // 
             // dateTimePicker1
             // 
@@ -363,6 +361,7 @@
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
             this.dateTimePicker1.TabIndex = 22;
+            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.startTimeChange);
             // 
             // label2
             // 

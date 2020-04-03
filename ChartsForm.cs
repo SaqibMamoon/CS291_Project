@@ -111,17 +111,14 @@ namespace CS291_Project
             // Set the ComboBox to the first option by default
             tablesComboBox.SelectedIndex = 0;
         }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        private void startTimeChange(object s, EventArgs e)
         {
             this.startDate = dateTimePicker1.Value;
         }
-
-        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        private void endTimeChanged(object s, EventArgs e)
         {
             this.endDate = dateTimePicker2.Value;
         }
-
         private void b1C(object sender, EventArgs e)
         {
             carChartUpdate(buts["b1"], buts["b1"].button, "b1");
@@ -142,7 +139,6 @@ namespace CS291_Project
         private void b5C(object sender, EventArgs e)
         {
             carChartUpdate(buts["b5"], buts["b5"].button, "b5");
-
         }
         private void b6C(object sender, EventArgs e)
         {
@@ -412,14 +408,10 @@ namespace CS291_Project
             chart1.ChartAreas[0].AxisY.Minimum = 0;
             chart1.ChartAreas[0].AxisY.Maximum= 5;
             List<recursiveTool> toolsRen = new List<recursiveTool>();
-            for (int i=0; i < paths; i++)
-            {
-                recursiveTool tool = new recursiveTool();
-                toolsRen.Add(tool);
-            }
             try
             {
-                toolsRen = this.recurQuery(store.Count, store, toolsRen, "car, car_type, pricing_model, rental WHERE rental.car_id = car.car_id and car.type_id = car_type.type_id and car_type.pricing_id = pricing_model.pricing_id");
+                toolsRen = recurQuery(store.Count, store, "car, car_type, pricing_model, rental WHERE rental.car_id = car.car_id and car.type_id = car_type.type_id and car_type.pricing_id = pricing_model.pricing_id");
+                //toolsRen = this.recurQuery(store.Count, store, toolsRen, "car, car_type, pricing_model, rental WHERE rental.car_id = car.car_id and car.type_id = car_type.type_id and car_type.pricing_id = pricing_model.pricing_id");
                 foreach (recursiveTool tool in toolsRen)
                 {
                     chart1.Series["Series1"].Points.AddXY(tool.direction, tool.count);
@@ -486,56 +478,92 @@ namespace CS291_Project
             }
         }
 
-        private List<recursiveTool> recurQuery(int n, List<List<string>> vs, List<recursiveTool> recursiveTools, string fromWhere)
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
 
-            System.Diagnostics.Debug.WriteLine(n, "prom");
+        }
+        // 
+        private List<recursiveTool> recurQuery(int n, List<List<string>> vs, string fromWhere)
+        {
+            /*
             if (n == 1)
             {
                 //Goes through each item
-                for(int i=0; i < vs[n-1].Count; i++)
+                for (int i = 0; i < vs[n - 1].Count; i++)
                 {
                     //Goes through each portion of recursive tools to put the item into
-                    for (int j=0; j < recursiveTools.Count / vs[n-1].Count; j++)
+                    for (int j = 0; j < recursiveTools.Count / vs[n - 1].Count; j++)
                     {
-                        recursiveTool temp = recursiveTools[(i * recursiveTools.Count / vs[n-1].Count) + j];
-                        temp.direction += vs[n-1][i];
+                        recursiveTool temp = recursiveTools[(i * recursiveTools.Count / vs[n - 1].Count) + j];
+                        temp.direction += vs[n - 1][i];
 
                         using (SqlConnection conn = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
                                                                     "AttachDbFilename=|DataDirectory|Database1.mdf;" +
                                                                     "Integrated Security=True"))
                         {
                             conn.Open();
-                            string start_and_end_check = "AND ((" + startDate.ToString("yyyy'-'MM'-'dd") + " >= start_date AND " + startDate.ToString("yyyy'-'MM'-'dd") + " <= end_date) OR (" + endDate.ToString("yyyy'-'MM'-'dd") + " >= start_date AND " + endDate.ToString("yyyy'-'MM'-'dd") + " <= end_date))";
-                            string command = "SELECT count (*) FROM " + fromWhere + temp.direction;// + start_and_end_check;
-                            System.Diagnostics.Debug.WriteLine(command, "That bitch");
-                            System.Diagnostics.Debug.WriteLine(temp, "Temporary");
+                            string start = startDate.ToString("yyyy-MM-dd");
+                            string end = endDate.ToString("yyyy-MM-dd");
+                            System.Diagnostics.Debug.WriteLine(start);
+                            string start_and_end_check = " AND ((start_date BETWEEN @startD AND @endD) OR (end_date BETWEEN @startD AND @endD))";
+                            string command = "SELECT count (*) FROM " + fromWhere + temp.direction + start_and_end_check;
+                            System.Diagnostics.Debug.WriteLine(command, "checker");
                             SqlCommand comm = new SqlCommand(command, conn);
+                            comm.Parameters.AddWithValue("@startD", startDate.ToString("yyyy-MM-dd"));
+                            comm.Parameters.AddWithValue("@endD", endDate.ToString("yyyy-MM-dd"));
                             int lemming = (Int32)comm.ExecuteScalar();
                             temp.count = lemming;
                             conn.Close();
                         }
-                        recursiveTools[(i * recursiveTools.Count / vs[n-1].Count) + j] = temp;
+                        recursiveTools[(i * recursiveTools.Count / vs[n - 1].Count) + j] = temp;
                     }
                 }
                 return recursiveTools;
-            }
 
-            else
+            }*/
+            List<recursiveTool> tools = new List<recursiveTool>();
+            List<string> nm = vs[0];
+            //This is the proper way to do it
+            for (int i = 1; i < vs.Count; i++)
             {
-                //Goes through each item
-                for (int i = 0; i < vs[n-1].Count; i++)
-                {
-                    //Goes through each portion of recursive tools to put the item into
-                    for (int j = 0; j < recursiveTools.Count / vs[n-1].Count; j++)
-                    {
-                        recursiveTool temp = recursiveTools[(i * recursiveTools.Count / vs[n-1].Count) + j];
-                        temp.direction += vs[n-1][i];
-                        recursiveTools[(i * recursiveTools.Count / vs[n-1].Count) + j] = temp;
-                    }
-                }
-                return recurQuery(n - 1, vs, recursiveTools, fromWhere);
+                nm = cartesianProduct(nm, vs[i]);
             }
+            foreach(string str in nm)
+            {
+                recursiveTool tool = new recursiveTool(0, str);
+                using (SqlConnection conn = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                                                                    "AttachDbFilename=|DataDirectory|Database1.mdf;" +
+                                                                    "Integrated Security=True"))
+                {
+                    conn.Open();
+                    string start = startDate.ToString("yyyy-MM-dd");
+                    string end = endDate.ToString("yyyy-MM-dd");
+                    System.Diagnostics.Debug.WriteLine(start);
+                    string start_and_end_check = " AND ((start_date BETWEEN @startD AND @endD) OR (end_date BETWEEN @startD AND @endD))";
+                    string command = "SELECT count (*) FROM " + fromWhere + str + start_and_end_check;
+                    System.Diagnostics.Debug.WriteLine(command, "checker");
+                    SqlCommand comm = new SqlCommand(command, conn);
+                    comm.Parameters.AddWithValue("@startD", startDate.ToString("yyyy-MM-dd"));
+                    comm.Parameters.AddWithValue("@endD", endDate.ToString("yyyy-MM-dd"));
+                    tool.count = (Int32)comm.ExecuteScalar();
+                    conn.Close();
+                }
+                tools.Add(tool);
+            }
+            return tools;
+        }
+
+        private List<string> cartesianProduct(List<string> a, List<string> b)
+        {
+            List<string> result = new List<string>();
+            for(int i =0; i < a.Count ; i++)
+            {
+                for(int j=0; j < b.Count; j++)
+                {
+                    result.Add(a[i] + b[j]);
+                }
+            }
+            return result;
         }
     }
 }
