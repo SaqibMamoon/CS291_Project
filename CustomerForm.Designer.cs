@@ -30,38 +30,34 @@
         {
 			this.components = new System.ComponentModel.Container();
 			this.label1 = new System.Windows.Forms.Label();
-			this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-			this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+			this.fromDateTimePicker = new System.Windows.Forms.DateTimePicker();
 			this.label2 = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
-			this.comboBox1 = new System.Windows.Forms.ComboBox();
-			this.comboBox2 = new System.Windows.Forms.ComboBox();
+			this.pickupBranchComboBox = new System.Windows.Forms.ComboBox();
+			this.dropoffBranchComboBox = new System.Windows.Forms.ComboBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.cartypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.fillByToolStrip = new System.Windows.Forms.ToolStrip();
-			this.fillByToolStripButton = new System.Windows.Forms.ToolStripButton();
-			this.modelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.manufacturerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.seatsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.doorsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colorsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.heatedSeatDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.ageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.conditionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.sunroofDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.bluetoothDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.manualDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.fuelTypeDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.database1DataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.database1DataSet1 = new CS291_Project.Database1DataSet1();
 			this.car_typeTableAdapter = new CS291_Project.Database1DataSet1TableAdapters.car_typeTableAdapter();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+			this.selectCarComboBox = new System.Windows.Forms.ComboBox();
+			this.label6 = new System.Windows.Forms.Label();
+			this.billingCycleComboBox = new System.Windows.Forms.ComboBox();
+			this.label7 = new System.Windows.Forms.Label();
+			this.bookButton = new System.Windows.Forms.Button();
+			this.numCyclesInput = new System.Windows.Forms.NumericUpDown();
+			this.label3 = new System.Windows.Forms.Label();
+			this.label8 = new System.Windows.Forms.Label();
+			this.label9 = new System.Windows.Forms.Label();
+			this.endDateLabel = new System.Windows.Forms.Label();
+			this.totalCostLabel = new System.Windows.Forms.Label();
+			this.carTextInfo = new System.Windows.Forms.TextBox();
+			this.database1DataSet2 = new CS291_Project.Database1DataSet();
 			((System.ComponentModel.ISupportInitialize)(this.cartypeBindingSource)).BeginInit();
-			this.fillByToolStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.database1DataSet1BindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.database1DataSet1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numCyclesInput)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.database1DataSet2)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -73,65 +69,49 @@
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Booking for customer: X ";
 			// 
-			// dateTimePicker1
+			// fromDateTimePicker
 			// 
-			this.dateTimePicker1.Location = new System.Drawing.Point(124, 46);
-			this.dateTimePicker1.Name = "dateTimePicker1";
-			this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-			this.dateTimePicker1.TabIndex = 1;
-			// 
-			// dateTimePicker2
-			// 
-			this.dateTimePicker2.Location = new System.Drawing.Point(487, 47);
-			this.dateTimePicker2.Name = "dateTimePicker2";
-			this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-			this.dateTimePicker2.TabIndex = 2;
+			this.fromDateTimePicker.Location = new System.Drawing.Point(124, 46);
+			this.fromDateTimePicker.Name = "fromDateTimePicker";
+			this.fromDateTimePicker.Size = new System.Drawing.Size(200, 20);
+			this.fromDateTimePicker.TabIndex = 1;
+			this.fromDateTimePicker.ValueChanged += new System.EventHandler(this.fromDateTimePicker_ValueChanged);
 			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(59, 52);
+			this.label2.Location = new System.Drawing.Point(56, 52);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(59, 13);
+			this.label2.Size = new System.Drawing.Size(58, 13);
 			this.label2.TabIndex = 3;
-			this.label2.Text = "From Date:";
-			this.label2.Click += new System.EventHandler(this.label2_Click);
+			this.label2.Text = "Start Date:";
 			// 
-			// label3
+			// pickupBranchComboBox
 			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(432, 54);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(49, 13);
-			this.label3.TabIndex = 4;
-			this.label3.Text = "To Date:";
-			this.label3.Click += new System.EventHandler(this.label3_Click);
+			this.pickupBranchComboBox.FormattingEnabled = true;
+			this.pickupBranchComboBox.Location = new System.Drawing.Point(124, 73);
+			this.pickupBranchComboBox.Name = "pickupBranchComboBox";
+			this.pickupBranchComboBox.Size = new System.Drawing.Size(200, 21);
+			this.pickupBranchComboBox.TabIndex = 6;
+			this.pickupBranchComboBox.SelectedIndexChanged += new System.EventHandler(this.pickupBranchComboBox_SelectedIndexChanged);
 			// 
-			// comboBox1
+			// dropoffBranchComboBox
 			// 
-			this.comboBox1.FormattingEnabled = true;
-			this.comboBox1.Location = new System.Drawing.Point(124, 73);
-			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(200, 21);
-			this.comboBox1.TabIndex = 6;
-			// 
-			// comboBox2
-			// 
-			this.comboBox2.FormattingEnabled = true;
-			this.comboBox2.Location = new System.Drawing.Point(487, 73);
-			this.comboBox2.Name = "comboBox2";
-			this.comboBox2.Size = new System.Drawing.Size(200, 21);
-			this.comboBox2.TabIndex = 7;
+			this.dropoffBranchComboBox.FormattingEnabled = true;
+			this.dropoffBranchComboBox.Location = new System.Drawing.Point(487, 73);
+			this.dropoffBranchComboBox.Name = "dropoffBranchComboBox";
+			this.dropoffBranchComboBox.Size = new System.Drawing.Size(200, 21);
+			this.dropoffBranchComboBox.TabIndex = 7;
+			this.dropoffBranchComboBox.SelectedIndexChanged += new System.EventHandler(this.dropoffBranchComboBox_SelectedIndexChanged);
 			// 
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(36, 76);
+			this.label4.Location = new System.Drawing.Point(30, 76);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(85, 13);
 			this.label4.TabIndex = 8;
 			this.label4.Text = "Pick Up Branch:";
-			this.label4.Click += new System.EventHandler(this.label4_Click);
 			// 
 			// label5
 			// 
@@ -142,140 +122,10 @@
 			this.label5.TabIndex = 9;
 			this.label5.Text = "Drop Off Branch:";
 			// 
-			// dataGridView1
-			// 
-			this.dataGridView1.AllowUserToAddRows = false;
-			this.dataGridView1.AllowUserToDeleteRows = false;
-			this.dataGridView1.AutoGenerateColumns = false;
-			this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.modelDataGridViewTextBoxColumn,
-            this.manufacturerDataGridViewTextBoxColumn,
-            this.seatsDataGridViewTextBoxColumn,
-            this.doorsDataGridViewTextBoxColumn,
-            this.colorsDataGridViewTextBoxColumn,
-            this.heatedSeatDataGridViewCheckBoxColumn,
-            this.ageDataGridViewTextBoxColumn,
-            this.conditionDataGridViewTextBoxColumn,
-            this.sunroofDataGridViewCheckBoxColumn,
-            this.bluetoothDataGridViewCheckBoxColumn,
-            this.manualDataGridViewCheckBoxColumn,
-            this.fuelTypeDataGridViewCheckBoxColumn});
-			this.dataGridView1.DataSource = this.cartypeBindingSource;
-			this.dataGridView1.Location = new System.Drawing.Point(39, 126);
-			this.dataGridView1.Name = "dataGridView1";
-			this.dataGridView1.ReadOnly = true;
-			this.dataGridView1.Size = new System.Drawing.Size(983, 316);
-			this.dataGridView1.TabIndex = 10;
-			this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_3);
-			// 
 			// cartypeBindingSource
 			// 
 			this.cartypeBindingSource.DataMember = "car_type";
 			this.cartypeBindingSource.DataSource = this.database1DataSet1BindingSource;
-			// 
-			// fillByToolStrip
-			// 
-			this.fillByToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fillByToolStripButton});
-			this.fillByToolStrip.Location = new System.Drawing.Point(0, 0);
-			this.fillByToolStrip.Name = "fillByToolStrip";
-			this.fillByToolStrip.Size = new System.Drawing.Size(1064, 25);
-			this.fillByToolStrip.TabIndex = 11;
-			this.fillByToolStrip.Text = "fillByToolStrip";
-			// 
-			// fillByToolStripButton
-			// 
-			this.fillByToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.fillByToolStripButton.Name = "fillByToolStripButton";
-			this.fillByToolStripButton.Size = new System.Drawing.Size(39, 22);
-			this.fillByToolStripButton.Text = "FillBy";
-			this.fillByToolStripButton.Click += new System.EventHandler(this.fillByToolStripButton_Click);
-			// 
-			// modelDataGridViewTextBoxColumn
-			// 
-			this.modelDataGridViewTextBoxColumn.DataPropertyName = "model";
-			this.modelDataGridViewTextBoxColumn.HeaderText = "Model";
-			this.modelDataGridViewTextBoxColumn.Name = "modelDataGridViewTextBoxColumn";
-			this.modelDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// manufacturerDataGridViewTextBoxColumn
-			// 
-			this.manufacturerDataGridViewTextBoxColumn.DataPropertyName = "manufacturer";
-			this.manufacturerDataGridViewTextBoxColumn.HeaderText = "Manufacturer";
-			this.manufacturerDataGridViewTextBoxColumn.Name = "manufacturerDataGridViewTextBoxColumn";
-			this.manufacturerDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// seatsDataGridViewTextBoxColumn
-			// 
-			this.seatsDataGridViewTextBoxColumn.DataPropertyName = "seats";
-			this.seatsDataGridViewTextBoxColumn.HeaderText = "Seats";
-			this.seatsDataGridViewTextBoxColumn.Name = "seatsDataGridViewTextBoxColumn";
-			this.seatsDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// doorsDataGridViewTextBoxColumn
-			// 
-			this.doorsDataGridViewTextBoxColumn.DataPropertyName = "doors";
-			this.doorsDataGridViewTextBoxColumn.HeaderText = "Doors";
-			this.doorsDataGridViewTextBoxColumn.Name = "doorsDataGridViewTextBoxColumn";
-			this.doorsDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// colorsDataGridViewTextBoxColumn
-			// 
-			this.colorsDataGridViewTextBoxColumn.DataPropertyName = "colors";
-			this.colorsDataGridViewTextBoxColumn.HeaderText = "Colors";
-			this.colorsDataGridViewTextBoxColumn.Name = "colorsDataGridViewTextBoxColumn";
-			this.colorsDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// heatedSeatDataGridViewCheckBoxColumn
-			// 
-			this.heatedSeatDataGridViewCheckBoxColumn.DataPropertyName = "heatedSeat";
-			this.heatedSeatDataGridViewCheckBoxColumn.HeaderText = "Heated Seats";
-			this.heatedSeatDataGridViewCheckBoxColumn.Name = "heatedSeatDataGridViewCheckBoxColumn";
-			this.heatedSeatDataGridViewCheckBoxColumn.ReadOnly = true;
-			// 
-			// ageDataGridViewTextBoxColumn
-			// 
-			this.ageDataGridViewTextBoxColumn.DataPropertyName = "age";
-			this.ageDataGridViewTextBoxColumn.HeaderText = "Age";
-			this.ageDataGridViewTextBoxColumn.Name = "ageDataGridViewTextBoxColumn";
-			this.ageDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// conditionDataGridViewTextBoxColumn
-			// 
-			this.conditionDataGridViewTextBoxColumn.DataPropertyName = "condition";
-			this.conditionDataGridViewTextBoxColumn.HeaderText = "Condition";
-			this.conditionDataGridViewTextBoxColumn.Name = "conditionDataGridViewTextBoxColumn";
-			this.conditionDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// sunroofDataGridViewCheckBoxColumn
-			// 
-			this.sunroofDataGridViewCheckBoxColumn.DataPropertyName = "sun_roof";
-			this.sunroofDataGridViewCheckBoxColumn.HeaderText = "Sun Roof";
-			this.sunroofDataGridViewCheckBoxColumn.Name = "sunroofDataGridViewCheckBoxColumn";
-			this.sunroofDataGridViewCheckBoxColumn.ReadOnly = true;
-			// 
-			// bluetoothDataGridViewCheckBoxColumn
-			// 
-			this.bluetoothDataGridViewCheckBoxColumn.DataPropertyName = "bluetooth";
-			this.bluetoothDataGridViewCheckBoxColumn.HeaderText = "Bluetooth";
-			this.bluetoothDataGridViewCheckBoxColumn.Name = "bluetoothDataGridViewCheckBoxColumn";
-			this.bluetoothDataGridViewCheckBoxColumn.ReadOnly = true;
-			// 
-			// manualDataGridViewCheckBoxColumn
-			// 
-			this.manualDataGridViewCheckBoxColumn.DataPropertyName = "manual";
-			this.manualDataGridViewCheckBoxColumn.HeaderText = "Manual";
-			this.manualDataGridViewCheckBoxColumn.Name = "manualDataGridViewCheckBoxColumn";
-			this.manualDataGridViewCheckBoxColumn.ReadOnly = true;
-			// 
-			// fuelTypeDataGridViewCheckBoxColumn
-			// 
-			this.fuelTypeDataGridViewCheckBoxColumn.DataPropertyName = "fuelType";
-			this.fuelTypeDataGridViewCheckBoxColumn.HeaderText = "Fuel Type";
-			this.fuelTypeDataGridViewCheckBoxColumn.Name = "fuelTypeDataGridViewCheckBoxColumn";
-			this.fuelTypeDataGridViewCheckBoxColumn.ReadOnly = true;
 			// 
 			// database1DataSet1BindingSource
 			// 
@@ -291,31 +141,164 @@
 			// 
 			this.car_typeTableAdapter.ClearBeforeFill = true;
 			// 
+			// selectCarComboBox
+			// 
+			this.selectCarComboBox.FormattingEnabled = true;
+			this.selectCarComboBox.Location = new System.Drawing.Point(124, 122);
+			this.selectCarComboBox.Name = "selectCarComboBox";
+			this.selectCarComboBox.Size = new System.Drawing.Size(200, 21);
+			this.selectCarComboBox.TabIndex = 12;
+			this.selectCarComboBox.SelectedIndexChanged += new System.EventHandler(this.selectCarComboBox_SelectedIndexChanged);
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(56, 125);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(59, 13);
+			this.label6.TabIndex = 13;
+			this.label6.Text = "Select Car:";
+			// 
+			// billingCycleComboBox
+			// 
+			this.billingCycleComboBox.FormattingEnabled = true;
+			this.billingCycleComboBox.Items.AddRange(new object[] {
+            "Daily",
+            "Weekly",
+            "Monthly"});
+			this.billingCycleComboBox.Location = new System.Drawing.Point(124, 163);
+			this.billingCycleComboBox.Name = "billingCycleComboBox";
+			this.billingCycleComboBox.Size = new System.Drawing.Size(200, 21);
+			this.billingCycleComboBox.TabIndex = 15;
+			this.billingCycleComboBox.SelectedIndexChanged += new System.EventHandler(this.billingCycleComboBox_SelectedIndexChanged);
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Location = new System.Drawing.Point(49, 166);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(66, 13);
+			this.label7.TabIndex = 16;
+			this.label7.Text = "Billing Cycle:";
+			// 
+			// bookButton
+			// 
+			this.bookButton.Location = new System.Drawing.Point(124, 281);
+			this.bookButton.Name = "bookButton";
+			this.bookButton.Size = new System.Drawing.Size(75, 23);
+			this.bookButton.TabIndex = 17;
+			this.bookButton.Text = "Book";
+			this.bookButton.UseVisualStyleBackColor = true;
+			this.bookButton.Click += new System.EventHandler(this.bookButton_Click);
+			// 
+			// numCyclesInput
+			// 
+			this.numCyclesInput.Location = new System.Drawing.Point(124, 190);
+			this.numCyclesInput.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numCyclesInput.Name = "numCyclesInput";
+			this.numCyclesInput.Size = new System.Drawing.Size(200, 20);
+			this.numCyclesInput.TabIndex = 18;
+			this.numCyclesInput.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numCyclesInput.ValueChanged += new System.EventHandler(this.numCyclesInput_ValueChanged);
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(60, 229);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(55, 13);
+			this.label3.TabIndex = 19;
+			this.label3.Text = "End Date:";
+			// 
+			// label8
+			// 
+			this.label8.AutoSize = true;
+			this.label8.Location = new System.Drawing.Point(49, 192);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(66, 13);
+			this.label8.TabIndex = 20;
+			this.label8.Text = "Num Cycles:";
+			// 
+			// label9
+			// 
+			this.label9.AutoSize = true;
+			this.label9.Location = new System.Drawing.Point(60, 255);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(58, 13);
+			this.label9.TabIndex = 21;
+			this.label9.Text = "Total Cost:";
+			// 
+			// endDateLabel
+			// 
+			this.endDateLabel.AutoSize = true;
+			this.endDateLabel.Location = new System.Drawing.Point(121, 229);
+			this.endDateLabel.Name = "endDateLabel";
+			this.endDateLabel.Size = new System.Drawing.Size(0, 13);
+			this.endDateLabel.TabIndex = 22;
+			// 
+			// totalCostLabel
+			// 
+			this.totalCostLabel.AutoSize = true;
+			this.totalCostLabel.Location = new System.Drawing.Point(124, 255);
+			this.totalCostLabel.Name = "totalCostLabel";
+			this.totalCostLabel.Size = new System.Drawing.Size(0, 13);
+			this.totalCostLabel.TabIndex = 23;
+			// 
+			// carTextInfo
+			// 
+			this.carTextInfo.AcceptsReturn = true;
+			this.carTextInfo.Location = new System.Drawing.Point(399, 122);
+			this.carTextInfo.Multiline = true;
+			this.carTextInfo.Name = "carTextInfo";
+			this.carTextInfo.ReadOnly = true;
+			this.carTextInfo.Size = new System.Drawing.Size(288, 182);
+			this.carTextInfo.TabIndex = 24;
+			// 
+			// database1DataSet2
+			// 
+			this.database1DataSet2.DataSetName = "Database1DataSet";
+			this.database1DataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+			// 
 			// CustomerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1064, 585);
-			this.Controls.Add(this.fillByToolStrip);
-			this.Controls.Add(this.dataGridView1);
+			this.ClientSize = new System.Drawing.Size(729, 346);
+			this.Controls.Add(this.carTextInfo);
+			this.Controls.Add(this.totalCostLabel);
+			this.Controls.Add(this.endDateLabel);
+			this.Controls.Add(this.label9);
+			this.Controls.Add(this.label8);
+			this.Controls.Add(this.label3);
+			this.Controls.Add(this.numCyclesInput);
+			this.Controls.Add(this.bookButton);
+			this.Controls.Add(this.label7);
+			this.Controls.Add(this.billingCycleComboBox);
+			this.Controls.Add(this.label6);
+			this.Controls.Add(this.selectCarComboBox);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.label4);
-			this.Controls.Add(this.comboBox2);
-			this.Controls.Add(this.comboBox1);
-			this.Controls.Add(this.label3);
+			this.Controls.Add(this.dropoffBranchComboBox);
+			this.Controls.Add(this.pickupBranchComboBox);
 			this.Controls.Add(this.label2);
-			this.Controls.Add(this.dateTimePicker2);
-			this.Controls.Add(this.dateTimePicker1);
+			this.Controls.Add(this.fromDateTimePicker);
 			this.Controls.Add(this.label1);
 			this.Name = "CustomerForm";
-			this.Text = "Customer";
+			this.Text = "Booking";
 			this.Load += new System.EventHandler(this.CustomerForm_Load);
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.cartypeBindingSource)).EndInit();
-			this.fillByToolStrip.ResumeLayout(false);
-			this.fillByToolStrip.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.database1DataSet1BindingSource)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.database1DataSet1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numCyclesInput)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.database1DataSet2)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -324,32 +307,28 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker fromDateTimePicker;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.ComboBox comboBox1;
-		private System.Windows.Forms.ComboBox comboBox2;
+		private System.Windows.Forms.ComboBox pickupBranchComboBox;
+		private System.Windows.Forms.ComboBox dropoffBranchComboBox;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.DataGridView dataGridView1;
 		private System.Windows.Forms.BindingSource database1DataSet1BindingSource;
 		private Database1DataSet1 database1DataSet1;
 		private System.Windows.Forms.BindingSource cartypeBindingSource;
 		private Database1DataSet1TableAdapters.car_typeTableAdapter car_typeTableAdapter;
-		private System.Windows.Forms.DataGridViewTextBoxColumn modelDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn manufacturerDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn seatsDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn doorsDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colorsDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewCheckBoxColumn heatedSeatDataGridViewCheckBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ageDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn conditionDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewCheckBoxColumn sunroofDataGridViewCheckBoxColumn;
-		private System.Windows.Forms.DataGridViewCheckBoxColumn bluetoothDataGridViewCheckBoxColumn;
-		private System.Windows.Forms.DataGridViewCheckBoxColumn manualDataGridViewCheckBoxColumn;
-		private System.Windows.Forms.DataGridViewCheckBoxColumn fuelTypeDataGridViewCheckBoxColumn;
-		private System.Windows.Forms.ToolStrip fillByToolStrip;
-		private System.Windows.Forms.ToolStripButton fillByToolStripButton;
+		private System.Windows.Forms.ComboBox selectCarComboBox;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.ComboBox billingCycleComboBox;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.Button bookButton;
+		private System.Windows.Forms.NumericUpDown numCyclesInput;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.Label label9;
+		private System.Windows.Forms.Label endDateLabel;
+		private System.Windows.Forms.Label totalCostLabel;
+		private System.Windows.Forms.TextBox carTextInfo;
+		private Database1DataSet database1DataSet2;
 	}
 }
