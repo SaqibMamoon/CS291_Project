@@ -28,10 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.customerComboBox = new System.Windows.Forms.ComboBox();
             this.bookButton = new System.Windows.Forms.Button();
             this.bookingLabel = new System.Windows.Forms.Label();
             this.backButton = new System.Windows.Forms.Button();
+            this.database1DataSet = new CS291_Project.Database1DataSet();
+            this.database1DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.database1DataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.database1DataSetBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // customerComboBox
@@ -71,6 +76,16 @@
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
+            // database1DataSet
+            // 
+            this.database1DataSet.DataSetName = "Database1DataSet";
+            this.database1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // database1DataSetBindingSource
+            // 
+            this.database1DataSetBindingSource.DataSource = this.database1DataSet;
+            this.database1DataSetBindingSource.Position = 0;
+            // 
             // EmployeeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -82,6 +97,8 @@
             this.Controls.Add(this.customerComboBox);
             this.Name = "EmployeeForm";
             this.Text = "Employee";
+            ((System.ComponentModel.ISupportInitialize)(this.database1DataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.database1DataSetBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -93,5 +110,7 @@
         private System.Windows.Forms.Button bookButton;
         private System.Windows.Forms.Label bookingLabel;
         private System.Windows.Forms.Button backButton;
+        private System.Windows.Forms.BindingSource database1DataSetBindingSource;
+        private Database1DataSet database1DataSet;
     }
 }

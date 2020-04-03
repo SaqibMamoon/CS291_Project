@@ -14,6 +14,9 @@ namespace CS291_Project
 {
     public partial class EmployeeForm : Form
     {
+        SqlDataAdapter adapter;
+        DataTable dataTable;
+        BindingSource bindingSource;
         public EmployeeForm()
         {
             InitializeComponent();
@@ -31,8 +34,11 @@ namespace CS291_Project
                 SqlDataReader dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    customerComboBox.Items.Add(dataReader[0] +  ", " + dataReader[1] + ", " + dataReader[2]);
+                    string customerInformation = dataReader[0] + ", " + dataReader[1] + ", " + dataReader[2];
+                    customerComboBox.Items.Add(Regex.Replace(customerInformation, @"\s\s+", " "));
                 }
+                dataReader.Close();
+
                 connection.Close();
             }
         }
