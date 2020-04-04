@@ -20,6 +20,7 @@ namespace CS291_Project
         string carModelName;
         DateTime endDate;
         Dictionary<string, int> branchLookup = new Dictionary<string, int>();
+        bool path;
 
         private void ResetComboBoxes()
         {
@@ -28,12 +29,12 @@ namespace CS291_Project
             selectCarComboBox.SelectedIndex = -1;
             billingCycleComboBox.SelectedIndex = 0;
         }
-        public CustomerForm(int customerID)
+        public CustomerForm(int customerID, bool employee)
         {
-            this.customerID = customerID;
+            this.customerID = customerID; path = employee;
             InitializeComponent();
             ResetComboBoxes();
-
+            button1.Text = "back";
             using (SqlConnection connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;" +
                                                         "AttachDbFilename=|DataDirectory|Database1.mdf;" +
                                                         "Integrated Security=True"))
@@ -333,6 +334,24 @@ namespace CS291_Project
                 connection.Close();
             }
             MessageBox.Show("Booking created!");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (path)
+            {
+                EmployeeForm neb = new EmployeeForm();
+                this.Hide();
+                neb.ShowDialog();
+                this.Close();
+            }
+            else
+            {
+                LoginForm neb = new LoginForm();
+                this.Hide();
+                neb.ShowDialog();
+                this.Close();
+            }
         }
     }
 }

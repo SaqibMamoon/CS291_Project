@@ -1,22 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CS291_Project
 {
     public partial class EmployeeForm : Form
     {
-        SqlDataAdapter adapter;
-        DataTable dataTable;
-        BindingSource bindingSource;
         public EmployeeForm()
         {
             InitializeComponent();
@@ -97,7 +88,7 @@ namespace CS291_Project
             int customerID = Int32.Parse(Regex.Match(selectedCustomer, @"\d+").Value);
 
             // Open booking form and pass in customerID
-            CustomerForm customerForm = new CustomerForm(customerID);
+            CustomerForm customerForm = new CustomerForm(customerID, true);
             customerForm.ShowDialog();
             UpdateComboBoxes();
         }
