@@ -1,4 +1,2 @@
 # CS291_Project
-[charts]: https://github.com/efirdc/CS291_Project/tree/master/ImagesManual/Chart.png "Chart"
-
-![charts]
+![Charts](https://github.com/efirdc/CS291_Project/blob/master/ImagesManual/Chart.PNG?raw=true)
