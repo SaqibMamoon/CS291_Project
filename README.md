@@ -42,7 +42,6 @@ The main menu for the employee will have 3 main features:
     3. Pricing models
 In all these cases, when an operation is complete, a message box will pop up confirming the user's action.
 
-## Employee Main Menu
 ![Cars](https://github.com/efirdc/CS291_Project/blob/mohammad/ImagesManual/addcar.png?raw=true)
 
 In order to add a car to the system, the employee must input the car ID (VIN number?), select a branch from the list of existing branches, and a car type from a list of existing car types.
